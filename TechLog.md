@@ -5,7 +5,46 @@ output: pdf_document
 
 # Tech Notes for STM
 
+## Thursday 
+
+* Full Text Search Ranking in PostgreSQL
+
+[Controlling Text Search](https://www.postgresql.org/docs/current/textsearch-controls.html#TEXTSEARCH-RANKING) in PostgreSQL.
+
 ## Wednesday 2/3/2021
+
+### PostgreSQL / GoLang `sql.NullString` and `sql.NullInt64`
+
+`SQL` has different null values than `Golang`. 
+
+So how do you [work with `SQL NULL` values and `JSON`](https://stackoverflow.com/questions/33072172/how-can-i-work-with-sql-null-values-and-json-in-a-good-way)?
+
+`sql.NullInt64` and `sql.NullString` do not implement marshaling or
+unmarshaling.  When there is no marshaling the default rules apply. Accordingly,
+they get marshaled as an object with their fields as attributes.
+
+The `sql.Null`[`String`, `Int64`, `Float64`, `Bool`] types have two fields: one
+is a typed value and the other is a boolean value. You can use the typed value
+to get either the value that's been set, or the type's "zero value" if it hasn't
+been set.
+
+    tags = tags4Scan.String
+
+The definition of `sql.NullString` :
+
+```go
+    type NullString struct {
+        String string
+        Valid  bool // Valid is true if String is not NULL
+    }
+```
+
+`sql.NullString` is a way to represent null string coming from SQL (which
+correspond to "NULL").
+
+**Note**:  If SQL NULL's become more of a problem, then switch to the `null.v3`
+package so you won't need to implement any of the marshaling or unmarshaling
+methods. It's a superset of the sql.Null structs. [See this for more information](https://stackoverflow.com/questions/33072172/how-can-i-work-with-sql-null-values-and-json-in-golang-in-a-good-way#answer-50807801)
 
 ### Homebrew Python Is Not For You
 
