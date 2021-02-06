@@ -7,6 +7,34 @@ output: pdf_document
 
 ## Friday 2/5/2021
 
+* VSCode installed `go` tooling
+
+```bash
+Tools environment: GOPATH=/Users/stergios/go
+Installing 9 tools at /Users/stergios/go/bin in module mode.
+  gopkgs
+  go-outline
+  gotests
+  gomodifytags
+  impl
+  goplay
+  dlv
+  golint
+  gopls
+
+Installing github.com/uudashr/gopkgs/v2/cmd/gopkgs (/Users/stergios/go/bin/gopkgs) SUCCEEDED
+Installing github.com/ramya-rao-a/go-outline (/Users/stergios/go/bin/go-outline) SUCCEEDED
+Installing github.com/cweill/gotests/... (/Users/stergios/go/bin/gotests) SUCCEEDED
+Installing github.com/fatih/gomodifytags (/Users/stergios/go/bin/gomodifytags) SUCCEEDED
+Installing github.com/josharian/impl (/Users/stergios/go/bin/impl) SUCCEEDED
+Installing github.com/haya14busa/goplay/cmd/goplay (/Users/stergios/go/bin/goplay) SUCCEEDED
+Installing github.com/go-delve/delve/cmd/dlv (/Users/stergios/go/bin/dlv) SUCCEEDED
+Installing golang.org/x/lint/golint (/Users/stergios/go/bin/golint) SUCCEEDED
+Installing golang.org/x/tools/gopls (/Users/stergios/go/bin/gopls) SUCCEEDED
+
+All tools successfully installed. You are ready to Go :).
+```
+
 * Installed `go` on `lastX86`
 
 ```bash
