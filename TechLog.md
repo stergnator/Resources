@@ -5,7 +5,18 @@ output: pdf_document
 
 # Tech Notes for STM
 
-## Friday 
+## Friday 2/5/2021
+
+* Installed `go` on `lastX86`
+
+```bash
+cd ~/src/update-golang
+git pull
+sudo ./update-golang.sh
+
+# Add /usr/local/go/bin:/Users/stergios/go/bin to PATH
+```
+
 
 * Installing `perl` using `asdf` on `lastX86`
 Following instructions found [here](https://blog.psantos.dev/installing-and-start-using-asdf-on-macos-high-sierra/)
@@ -51,7 +62,7 @@ $ asdf install ruby 2.5.1
 ```
 
 
-## Thursday 
+## Thursday 2/4/2021
 
 * Full Text Search Ranking in PostgreSQL
 
