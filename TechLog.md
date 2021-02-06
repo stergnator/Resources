@@ -5,6 +5,52 @@ output: pdf_document
 
 # Tech Notes for STM
 
+## Friday 
+
+* Installing `perl` using `asdf` on `lastX86`
+Following instructions found [here](https://blog.psantos.dev/installing-and-start-using-asdf-on-macos-high-sierra/)
+
+```bash
+asdf plugin-add perl
+asdf list-all perl | tail
+asdf install perl 5.32.1
+
+# Much waiting while perl compiles
+
+$ asdf list-all perl
+    No version set for command perl
+    Consider adding one of the following versions in your config file at
+    perl 5.32.1
+
+$ asdf global perl 5.32.1
+$ which perl
+    /Users/stergios/.asdf/shims/perl
+
+$ perl -v
+    This is perl 5, version 32, subversion 1 (v5.32.1) built for darwin-thread-multi-2level
+    (with 1 registered patch, see perl -V for more detail)
+```
+
+```bash
+# Let’s check the installed plugins running the following command:
+
+$ asdf plugin-list
+
+# This command should give us a list of installed plugins. But at this point, it will return a warning saying “Oohe nooes ~! No plugins installed“. The message is clear, we did not install any plugin yet. So, let’s install our first plugin. The Ruby plugin:
+
+$ asdf plugin-add ruby
+
+# Now it’s time to install one or more Ruby versions. But first, let’s see what versions are available:
+
+$ asdf list-all ruby
+
+# As you can see, a list of all available versions was returned, even the latest preview (2.6.0-preview1). I want to install the version 2.5.1, the latest stable one, so I run:
+
+$ asdf install ruby 2.5.1
+
+```
+
+
 ## Thursday 
 
 * Full Text Search Ranking in PostgreSQL
