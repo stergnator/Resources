@@ -7,9 +7,107 @@ output: pdf_document
 
 ## Friday 2/12/2021
 
-* Setting up `PostgreSQL` on `lastX86`
+* Install `python` via `asdf` on `lastX86`
 
-### Create `PostgreSQL` new user
+Switch all python development over to the use of the `asdf` installed version.  `brew` keeps
+blowing away versions without asking.  `asdf` will never do that.
+
+### Use [Python 3.9.1](https://www.python.org/downloads/release/python-391/)
+
+Release Date: Dec. 7, 2020
+
+This is the first maintenance release of Python 3.9
+
+Python 3.9.1 is the newest major release of the Python programming language, and
+it contains many new features and optimizations. We've made 282 changes since
+3.9.0 which is a significant amount. To compare, 3.8.1 only saw 192 commits
+since 3.8.0.
+
+
+```bash
+
+% asdf plugin-add python
+
+% asdf list-all python  # WOW! There are a lot of python versions.  457 to be exact.
+
+% asdf list-all python | wc
+    457     457    5989
+
+% asdf install python 3.9.1
+
+    python-build 3.9.1 /Users/stergios/.asdf/installs/python/3.9.1
+    python-build: use openssl@1.1 from homebrew
+    python-build: use readline from homebrew
+    Downloading Python-3.9.1.tar.xz...
+    -> https://www.python.org/ftp/python/3.9.1/Python-3.9.1.tar.xz
+    Installing Python-3.9.1...
+    python-build: use readline from homebrew
+    python-build: use zlib from xcode sdk
+    Installed Python-3.9.1 to /Users/stergios/.asdf/installs/python/3.9.1
+
+% rehash
+
+% which python
+    /Users/stergios/.asdf/shims/python
+
+
+# Using `asdf global` creates a file under your HOME directory called .tool-versions
+
+% asdf global python 3.9.1 # This sets python 3.8.4 as our default python version
+
+# But I did it the hard way:
+
+% echo "python 3.9.1" >>  /Users/stergios/.tool-versions
+
+% cat .tool-versions
+    perl 5.32.1
+    python 3.9.1
+
+
+# Install necessary python modules.
+
+pip3 install -r ~/src/faq.git/src/python/requirements_noversions.txt
+
+# psycopg2 had compilation errors.  It could not find the library -lssl
+
+# So I searched what brew had installed
+
+% brew search ssl
+    ==> Formulae
+    cfssl                libressl             osslsigncode         sslh                 sslmate              sslsplit             testssl
+    glib-openssl         openssl@1.1 ✔        ssldump              ssllabs-scan         sslscan              sslyze               wolfssl
+
+# Then I got specific information about openssl@1.1 that I had installed already
+
+% brew info openssl@1.1
+
+    openssl@1.1 is keg-only, which means it was not symlinked into /usr/local,
+    because macOS provides LibreSSL.
+
+    If you need to have openssl@1.1 first in your PATH, run:
+      echo 'export PATH="/usr/local/opt/openssl@1.1/bin:$PATH"' >> ~/.zshrc
+
+    For compilers to find openssl@1.1 you may need to set:
+      export LDFLAGS="-L/usr/local/opt/openssl@1.1/lib"
+      export CPPFLAGS="-I/usr/local/opt/openssl@1.1/include"
+
+
+# Ahah!  # openssl@1.1 is KEG-ONLY!  So follow it's advice:
+
+export LDFLAGS="-L/usr/local/opt/openssl@1.1/lib"
+export CPPFLAGS="-I/usr/local/opt/openssl@1.1/include"
+
+# And try again:
+
+pip3 install -r ~/src/faq.git/src/python/requirements_noversions.txt
+
+# Yay me!
+
+```
+
+### Setting up `PostgreSQL` on `lastX86`
+
+* Create `PostgreSQL` new user
 
 ```sql
 -- Creating PostgreSQL user.
@@ -25,10 +123,9 @@ CREATE DATABASE money ;
 GRANT ALL PRIVILEGES ON DATABASE money to stergios;
 ```
 
-
 ### Edit `PostgreSQL` configuration file `postgresql.conf`
 
-We want to allow all computers to access this database server.  In
+* We want to allow all computers to access this database server.  In
 `/usr/local/var/postgres/postgresql.conf` add the line **62** in the listing
 below under the `Connections Settings` section. 
 
