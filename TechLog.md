@@ -5,6 +5,58 @@ output: pdf_document
 
 # Tech Notes for STM
 
+## Monday 2/8/2021
+
+### CSS Selector [Combinators](https://www.w3.org/TR/selectors/#combinators)
+
+* What does the `>` (greater-than sign) CSS selector mean?
+
+`White Space` is the [Descendant
+combinator](https://www.w3.org/TR/selectors/#descendant-combinator) which
+separates two compound selectors. A selector of the form `A B` represents an
+`element B` that is an arbitrary descendant of some ancestor `element A`.
+
+    h1 em
+
+`>` is the [child combinator](https://www.w3.org/TR/selectors/#child-combinators).
+
+The following selector represents a `p` element that is a immediate child of `div`: 
+
+    div > p
+
+That means the selector `div > p.some_class` only selects paragraphs of
+`.some_class` that are nested directly inside a `div`, and not any paragraphs
+that are nested further within.
+
+`+` is the [Next-sibling combinator](https://www.w3.org/TR/selectors/#adjacent-sibling-combinators).
+
+The elements represented by the two sequences share the same parent in the
+document tree and the element represented by the first sequence **immediately
+precedes** the element represented by the second one. Non-element nodes (e.g. text
+between elements) are ignored when considering the adjacency of elements.
+
+    math + p
+
+A `p` element immediately following a `math` element
+
+`~` is the [Subsequent-sibling combinator](https://www.w3.org/TR/selectors/#general-sibling-combinators).
+
+The elements represented by the two compound selectors share the same parent in
+the document tree and the element represented by the first compound selector
+precedes (**not necessarily immediately**) the element represented by the second
+one.
+
+    h1 ~ pre
+
+Represents a pre element following an h1. It is a correct and valid, but partial, description of:
+
+```html
+<h1>Definition of the function a</h1>
+<p>Function a(x) has to be applied to all figures in the table.</p>
+<pre>function a(x) = 12x/13.5</pre>
+```
+
+
 ## Friday 2/5/2021
 
 * VSCode installed `go` tooling
