@@ -5,6 +5,71 @@ output: pdf_document
 
 # Tech Notes for STM
 
+## Friday 2/12/2021
+
+* Setting up `PostgreSQL` on `lastX86`
+
+### Create `PostgreSQL` new user
+
+```sql
+-- Creating PostgreSQL user.
+CREATE USER stergios WITH ENCRYPTED PASSWORD '__STRONG_PASSWORD_HERE__';
+
+-- Change PostgreSQL password
+ALTER ROLE stergios  WITH ENCRYPTED PASSWORD '__STRONG_PASSWORD_HERE__';
+
+-- Create one database so that user can login to the database. 
+CREATE DATABASE money ;
+
+-- Grant database access to the new user.
+GRANT ALL PRIVILEGES ON DATABASE money to stergios;
+```
+
+
+### Edit `PostgreSQL` configuration file `postgresql.conf`
+
+We want to allow all computers to access this database server.  In
+`/usr/local/var/postgres/postgresql.conf` add the line **62** in the listing
+below under the `Connections Settings` section. 
+
+```bash
+53 #------------------------------------------------------------ 
+54 # CONNECTIONS AND AUTHENTICATION 
+55 #------------------------------------------------------------ \
+56
+57 # - Connection Settings -
+
+62 listen_addresses = '*'    # ADD THIS LINE.
+```
+
+### Edit `PostgreSQL` configuration file `pg_hba.conf`
+
+We want to require passwords for all databases connections, edit
+`/usr/local/var/postgres/pg_hba.conf` as follows.
+
+
+```bash
+# TYPE  DATABASE        USER            ADDRESS                 METHOD
+
+# "local" is for Unix domain socket connections only
+local   all             all                                     md5
+# IPv4 local connections:
+host    all             all             127.0.0.1/32            md5
+host    all             all             192.168.86.0/24         md5
+# IPv6 local connections:
+host    all             all             ::1/128                 md5
+
+```
+
+### Restart `PostgreSQL`
+
+After most of the above alterations you need to restart `PostgreSQL` for the
+changes to take affect.
+
+```bash
+brew services restart postgresql
+```
+
 ## Monday 2/8/2021
 
 ### CSS Selector [Combinators](https://www.w3.org/TR/selectors/#combinators)
