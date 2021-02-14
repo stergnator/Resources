@@ -5,6 +5,16 @@ output: pdf_document
 
 # Tech Notes for STM
 
+## Saturday
+
+### ITerm2 Tricks
+
+* When SSHed into a server and you want another terminal window in to that server, try
+
+>% tmux -CC
+
+A new native window pops up on the desktop that is tunneled over SSH.
+
 ## Friday 2/12/2021
 
 * Install `python` via `asdf` on `lastX86`
