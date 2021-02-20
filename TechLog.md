@@ -5,7 +5,200 @@ output: pdf_document
 
 # Tech Notes for STM
 
-## Saturday
+## Friday 2/19/2021
+
+### Steps to Create a Go Module
+
+I'm using this resource [Using Go Modules](https://blog.golang.org/using-go-modules) in the following guide.
+
+1. Make sure there is a package name at the top of the go file:
+
+```bash
+% cd ~src/go/pg/hello
+% pwd
+    /Users/stergios/src/go/pg/hello
+% head -n 1 ../mydb/mydb.go
+    package mydb
+```
+
+2. Switch to the `mydb` directory where my DB access library resides and make it
+   the root of a module by using `go mod init`.
+
+```bash
+% cd ../mydb
+% code mydb_test.go
+```
+
+Let's add a test for the code before we actually create the module.
+
+```go
+package mydb
+
+import "testing"
+
+func TestMyDB(t *testing.T) {
+    want := "Sure, that worked."
+    if got := DoFakeTest(); got != want {
+        t.Errorf("DoFakeTest() = %q, want %q", got, want)
+    }
+}
+```
+
+3. Ok, now let's initialize the module:
+
+```bash
+% go mod init marinopoulos.net/mydb
+    go: creating new go.mod: module marinopoulos.net/mydb
+% cat go.mod
+    module marinopoulos.net/mydb
+
+    go 1.15
+```
+
+4. Run the test
+
+```bash
+% go test
+go: finding module for package github.com/lib/pq
+go: found github.com/lib/pq in github.com/lib/pq v1.9.0
+PASS
+ok  	marinopoulos.net/mydb	0.202s
+
+```
+
+5. Looking at the above output The `go` command resolves imports by using the
+   specific dependency module versions listed in `go.mod`. When it encounters an
+   `import` of a package not provided by any module in `go.mod`, the `go`
+   command automatically looks up the module containing that package and adds it
+   to `go.mod`, using the latest version.   In our example, `go test` resolved the new
+   `import "github.com/lib/pq"` to the module `github.com/lib/pq v1.9.0` .
+
+6. Let's see what happened to `go.mod` and look for dependencies that the `go` command
+   automatically added.
+
+```bash
+cat go.mod
+module marinopoulos.net/mydb
+
+go 1.15
+
+require github.com/lib/pq v1.9.0
+```
+
+7. A second `go test` command will not repeat this work, since the `go.mod` is now
+   up-to-date and the downloaded modules are cached locally (in
+   `$GOPATH/pkg/mod`)
+
+```bash
+% go test
+    PASS
+    ok  	marinopoulos.net/mydb	0.329s
+```
+
+8. As an aside and for future use, you can use the command `go list -m all`
+   lists the current module and all its dependencies:
+
+```bash
+% go list -m all
+    marinopoulos.net/mydb
+    github.com/lib/pq v1.9.0
+```
+
+9. As another point of reference, let's list the available tagged versions of
+   the `github.com/lib/pq` module:
+
+```bash
+go list -m -versions github.com/lib/pq
+    github.com/lib/pq v1.0.0 v1.1.0 v1.1.1 v1.2.0 v1.3.0 v1.4.0 v1.5.0 v1.5.1 v1.5.2 v1.6.0 v1.7.0 v1.7.1 v1.8.0 v1.9.0
+```
+
+### Steps to Use a Go Module
+
+1. Let's use our `mydb` module from our main program:
+
+```bash
+% cd ~/src/go/pg/hello
+% cat hello.go
+    package main
+
+    import (
+      "fmt"
+
+      "marinopoulos.net/mydb"
+    )
+
+    func main() {
+        // Get a greeting message and print it.
+        mydb.DoEverything()
+        fmt.Println("All Done in Hello.go")
+    }
+```
+
+2. Initialize our module:
+
+```bash
+% go mod init hello
+    go: creating new go.mod: module hello
+% cat go.mod
+    module hello
+
+    go 1.15
+```
+
+3. Let's try to build our program:
+
+```bash
+% go build hello.go
+    go: finding module for package marinopoulos.net/mydb
+    hello.go:6:2: cannot find module providing package marinopoulos.net/mydb: unrecognized import path "marinopoulos.net/mydb": https fetch: Get "https://marinopoulos.net/mydb?go-get=1": EOF
+```
+
+Opps, we got an error!
+
+4. Building failed because it could not locate our module since our module is a
+   local one.  Let's fix that. We need to point to the local version of our
+   `mydb` dependency rather than the one over the web.  To do that use `replace`
+   in `go.mod` to point to your local module.
+
+```bash
+% cat go.mod
+    module hello
+
+    go 1.15
+
+    replace marinopoulos.net/mydb => ../mydb
+```
+
+And now when you compile this module, it will use your local code rather than
+the other dependency.
+
+5. Let's try building again:
+
+```bash
+% go build hello.go
+    go: found marinopoulos.net/mydb in marinopoulos.net/mydb v0.0.0-00010101000000-000000000000
+```
+
+Great!  That worked.  What does the `go.mod` file look like now:
+
+```bash
+cat go.mod
+    module hello
+
+    go 1.15
+
+    replace marinopoulos.net/mydb => ../mydb
+
+    require marinopoulos.net/mydb v0.0.0-00010101000000-000000000000 // indirect
+```
+
+6. And that's it for now.  We are ready to `go!` with our new `mydb` module.
+
+You do need to make sure that the `replace` code you’re pointing to also has a
+`go.mod` file.  Which is why I went to the trouble of covering [Steps to Create
+a Go Module](#steps-to-create-a-go-module) above.
+
+## Saturday 2/13/2021
 
 ### ITerm2 Tricks
 
@@ -637,14 +830,14 @@ Folding regions are by default evaluated based on the indentation of lines. A fo
 Since the 1.22 release, folding regions can also be computed based on syntax tokens of the editor's configured language. The following languages already provide syntax aware folding: Markdown, HTML, CSS, LESS, SCSS, and JSON.
 
 1. Toggle Fold (⌘K ⌘L) folds or unfolds the region at the cursor.
-1. Fold Recursively (⌘K ⌘[) folds the innermost uncollapsed region at the cursor and all regions inside that region.
-1. Unfold Recursively (⌘K ⌘]) unfolds the region at the cursor and all regions inside that region.
-1. Fold (⌥⌘[) folds the innermost uncollapsed region at the cursor.
-1. Unfold (⌥⌘]) unfolds the collapsed region at the cursor.
-1. Fold All (⌘K ⌘0) folds all regions in the editor.
-1. Unfold All (⌘K ⌘J) unfolds all regions in the editor.
-1. Fold Level X (⌘K ⌘2 for level 2) folds all regions of level X, except the region at the current cursor position.
-1. Fold All Block Comments (⌘K ⌘/) folds all regions that start with a block comment token.
+2. Fold Recursively (⌘K ⌘[) folds the innermost uncollapsed region at the cursor and all regions inside that region.
+3. Unfold Recursively (⌘K ⌘]) unfolds the region at the cursor and all regions inside that region.
+4. Fold (⌥⌘[) folds the innermost uncollapsed region at the cursor.
+5. Unfold (⌥⌘]) unfolds the collapsed region at the cursor.
+6. Fold All (⌘K ⌘0) folds all regions in the editor.
+7. Unfold All (⌘K ⌘J) unfolds all regions in the editor.
+8. Fold Level X (⌘K ⌘2 for level 2) folds all regions of level X, except the region at the current cursor position.
+9. Fold All Block Comments (⌘K ⌘/) folds all regions that start with a block comment token.
 
 # Thursday 1/14/2021
 
