@@ -3,7 +3,66 @@ title: "Tech Notes for STM"
 output: pdf_document
 ---
 
+<style type="text/css">
+   ol {list-style-type: upper-alpha;}
+   ol ol { list-style-type: decimal;}
+   ol ol ol { list-style-type: lower-roman;}
+   ol ol ol ol { list-style-type: lower-alpha;}
+   ol ol ol ol ol { list-style-type: decimal;}
+   ol ol ol ol ol ol { list-style-type: upper-roman;}
+</style>
+
 # Tech Notes for STM
+
+## Friday 2/26/2021
+
+### Sending Email in go
+
+[Go Simple Mail](https://github.com/xhit/go-simple-mail) is a simple and
+efficient package to send emails. It is well tested and documented.
+
+###  What is [Viper](https://github.com/spf13/viper)?
+
+Viper is a complete configuration solution for Go applications including
+12-Factor apps. It is designed to work within an application, and can handle all
+types of configuration needs and formats. It supports:
+
+- setting defaults
+- reading from JSON, TOML, YAML, HCL, envfile and Java properties config files
+- live watching and re-reading of config files (optional)
+- reading from environment variables
+- reading from remote config systems (etcd or Consul), and watching changes
+- reading from command line flags
+- reading from buffer
+- setting explicit values
+
+Viper can be thought of as a registry for all of your applications configuration
+needs.
+
+## Monday 2/22/2021
+
+* I had a few python3 packages installed using `brew`.  Occasionally this causes
+  headaches. The latest example is as follows:
+
+```bash
+% ./scripts/startProgram.sh --summarize
+    ValueError: numpy.ndarray size changed, may indicate binary incompatibility. Expected 88 from C header, got 80 from PyObject
+```
+  
+So I removed the packages installed by `brew`, and installed them
+using `pip3`.
+
+```bash
+% brew rm scipy numpy
+% pip3 uninstall scipy numpy  # In case there were ancient versions lingering.
+% pip3 install numpy scipy
+```
+
+## Sunday 2/21/2021
+
+I started using linters on `server.go`.  They are
+[staticcheck](https://staticcheck.io/), and
+[golangci-lint](https://golangci-lint.run/), which is a Go linters aggregator.
 
 ## Friday 2/19/2021
 
@@ -144,6 +203,38 @@ go list -m -versions github.com/lib/pq
 
     go 1.15
 ```
+
++ Changes for go 1.16
+
+```bash
+% go mod init server.go
+    go: creating new go.mod: module server.go
+    go: to add module requirements and sums:
+      go mod tidy
+
+# Ok, let's follow the advice of using `go mod tidy`
+
+% go mod tidy
+    go: finding module for package github.com/lib/pq
+    go: finding module for package github.com/labstack/echo
+    go: finding module for package github.com/gorilla/websocket
+    go: finding module for package github.com/davecgh/go-spew/spew
+    go: found github.com/davecgh/go-spew/spew in github.com/davecgh/go-spew v1.1.1
+    go: found github.com/gorilla/websocket in github.com/gorilla/websocket v1.4.2
+    go: found github.com/labstack/echo in github.com/labstack/echo v3.3.10+incompatible
+    go: found github.com/lib/pq in github.com/lib/pq v1.9.0
+    go: finding module for package github.com/stretchr/testify/assert
+    go: finding module for package github.com/labstack/gommon/color
+    go: finding module for package golang.org/x/crypto/acme/autocert
+    go: finding module for package github.com/labstack/gommon/log
+    go: downloading github.com/stretchr/testify v1.7.0
+    go: found github.com/labstack/gommon/color in github.com/labstack/gommon v0.3.0
+    go: found github.com/labstack/gommon/log in github.com/labstack/gommon v0.3.0
+    go: found golang.org/x/crypto/acme/autocert in golang.org/x/crypto v0.0.0-20210220033148-5ea612d1eb83
+    go: found github.com/stretchr/testify/assert in github.com/stretchr/testify v1.7.0
+    go: downloading gopkg.in/yaml.v3 v3.0.0-20200313102051-9f266ea9e77c
+```
+
 
 3. Let's try to build our program:
 
