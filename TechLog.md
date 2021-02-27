@@ -16,6 +16,30 @@ output: pdf_document
 
 ## Friday 2/26/2021
 
+### TA-Lib
+
+```bash
+% brew install ta-lib  # Let Brew install the compiled libs
+==> Downloading https://homebrew.bintray.com/bottles/ta-lib-0.4.0.big_sur.bottle.1.tar.gz
+==> Pouring ta-lib-0.4.0.big_sur.bottle.1.tar.gz
+🍺  /usr/local/Cellar/ta-lib/0.4.0: 15 files, 2.4MB
+
+% pip3 install TA-Lib  # now install the python3 package for TA-Lib
+Collecting TA-Lib
+  Downloading TA-Lib-0.4.19.tar.gz (267 kB)
+     |████████████████████████████████| 267 kB 2.4 MB/s
+Requirement already satisfied: numpy in ./.asdf/installs/python/3.9.1/lib/python3.9/site-packages (from TA-Lib) (1.20.1)
+Using legacy 'setup.py install' for TA-Lib, since package 'wheel' is not installed.
+Installing collected packages: TA-Lib
+    Running setup.py install for TA-Lib ... done
+Successfully installed TA-Lib-0.4.19
+
+% pip3 install TA-Lib  # Install again to see where it was installed at
+Requirement already satisfied: TA-Lib in ./.asdf/installs/python/3.9.1/lib/python3.9/site-packages (0.4.19)
+Requirement already satisfied: numpy in ./.asdf/installs/python/3.9.1/lib/python3.9/site-packages (from TA-Lib) (1.20.1)
+```
+
+
 ### Sending Email in go
 
 [Go Simple Mail](https://github.com/xhit/go-simple-mail) is a simple and
