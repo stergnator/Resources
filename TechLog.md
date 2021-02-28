@@ -14,6 +14,57 @@ output: pdf_document
 
 # Tech Notes for STM
 
+## Saturday 2/27/2021
+
+### Learning the Finance Tech Stack in Python
+
+* `matplotlib/mpl-finance` is deprecated in favor of the current
+[`matplotlib/mplfinance`](https://github.com/matplotlib/mplfinance) .
+
+
+* [Tips on Working with Datetime Index in
+pandas](http://sergilehkyi.com/tips-on-working-with-datetime-index-in-pandas/)
+
+* How to create Candlestick charts within Matplotlib.
+https://pythonprogramming.net/candlestick-ohlc-graph-matplotlib-tutorial/
+
+* Learn know more about matplotlib & subplot2grid at [subplots with Matplotlib
+tutorial](https://pythonprogramming.net/subplot2grid-add_subplot-matplotlib-tutorial/).
+
+[`pandas_datareader`](https://github.com/pydata/pandas-datareader) is a python
+library for retireving remote data.  Pandas data reader was removed from
+pandas. It is now a separate repo and a separate install.  Up to date remote
+data access for pandas, works for multiple versions of pandas.
+
+Starting in 0.19.0, pandas no longer supports pandas.io.data or pandas.io.wb, so you must replace your imports from pandas.io with those from pandas_datareader:
+
+```bash
+pip3 install pandas-datareader
+
+
+pip3 install --upgrade mplfinance # not sure I am using this one yet.
+    # https://github.com/matplotlib/mplfinance  # Looks really good.
+```
+
+```python
+from pandas_datareader import data, wb
+import matplotlib.ticker as mticker
+import mplfinance as mpf
+
+```
+
+### Next Steps
+
+1. Read [Adding Your Own Technical Studies to Plots](
+https://github.com/matplotlib/mplfinance/blob/master/examples/addplot.ipynb)
+
+2. Read [mplfinance subplots using the "Panels
+Method"](https://github.com/matplotlib/mplfinance/blob/master/examples/panels.ipynb)
+
+3. Read more examples of using mplfinance in the [examples directory.](https://github.com/matplotlib/mplfinance)
+
+
+
 ## Friday 2/26/2021
 
 ### TA-Lib
