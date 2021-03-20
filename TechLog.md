@@ -14,6 +14,43 @@ output: pdf_document
 
 # Tech Notes for STM
 
+## Friday 3/19/2021
+
+### Important `brew` Gnu packages
+
+Make sure to install this utilities on any new mac.  A good resource on mapping
+Gnu names to brew names is
+[here](https://apple.stackexchange.com/questions/69223/how-to-replace-mac-os-x-utilities-with-gnu-core-utilities)
+
+```sh
+brew install coreutils findutils gnu-tar gnu-sed gawk gnutls gnu-indent gnu-getopt grep diffutils
+```
+
+## Thursday 3/18/2021
+
+### PostgreSQL Docker Info
+
+There is a lot of information on `DockerHub` covering the [Automated Build of the PostgreSQL Docker Image](
+https://registry.hub.docker.com/r/sameersbn/postgresql)
+
+### PostgreSQL Trusting Local Connections
+
+By default connections to the PostgreSQL server need to authenticated using a
+password. If desired you can trust connections from the local network using the
+`PG_TRUST_LOCALNET` variable.
+
+```bash
+docker run --name postgresql -itd --restart always \
+  --env 'PG_TRUST_LOCALNET=true' \
+  sameersbn/postgresql:12-20200524
+```
+
+__Note:__ *The local network here is the network to which the container is attached. This has
+different meanings depending on the --net parameter specified while starting the
+container. In the default configuration, this parameter would trust connections
+from other containers on the docker0 bridge.*
+
+
 ## Saturday 2/27/2021
 
 ### Learning the Finance Tech Stack in Python
