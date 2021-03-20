@@ -50,6 +50,25 @@ different meanings depending on the --net parameter specified while starting the
 container. In the default configuration, this parameter would trust connections
 from other containers on the docker0 bridge.*
 
+ ## Tuesday 3/2/2021
+
+ #### Dictionary-like cursor for psycopg2
+
+ Information taken from [Miscellaneous goodies for Psycopg2](https://www.psycopg.org/docs/extras.html)
+
+ ```python
+ >>> dict_cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+ >>> dict_cur.execute("INSERT INTO test (num, data) VALUES(%s, %s)",
+ ...                  (100, "abc'def"))
+ >>> dict_cur.execute("SELECT * FROM test")
+ >>> rec = dict_cur.fetchone()
+ >>> rec['id']
+ 1
+ >>> rec['num']
+ 100
+ >>> rec['data']
+ "abc'def"
+ ```
 
 ## Saturday 2/27/2021
 
