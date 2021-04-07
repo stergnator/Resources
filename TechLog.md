@@ -14,11 +14,42 @@ output: pdf_document
 
 # Tech Notes for STM
 
+### Kill a process in golang:
+
+`.Output()` runs a command, waits for it to finish, and collects its output.
+
+```sh
+// `echo "sudo_password" | sudo -S [command]`
+// is used in order to run the command with `sudo`
+
+_, err := exec.Command("sh", "-c", "echo '"+ sudopassword +"' | sudo -S pkill -SIGINT my_app_name").Output()
+
+if err != nil {
+    // ...
+} else {
+    // ...
+}
+```
+
+Same as above but without `sudo`
+
+```bash
+// `pkill -SIGINT -x -f "/usr/local/bin/postgrest PConfig_python"`
+
+_, err := exec.Command("/usr/bin/pkill -SIGTERM -x -f '/usr/local/bin/postgrest PConfig_python'").Output()
+
+if err != nil {
+    // ...
+} else {
+    // ...
+}
+```
+
 ## Friday 3/19/2021
 
 ### Important `brew` Gnu packages
 
-Make sure to install this utilities on any new mac.  A good resource on mapping
+Make sure to install these utilities on any new mac.  A good resource on mapping
 Gnu names to brew names is
 [here](https://apple.stackexchange.com/questions/69223/how-to-replace-mac-os-x-utilities-with-gnu-core-utilities)
 
