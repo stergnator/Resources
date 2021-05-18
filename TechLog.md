@@ -14,6 +14,57 @@ output: pdf_document
 
 # Tech Notes for STM
 
+
+## Tuesday 5/18/2021
+
+
+### How to only extract PostgreSQL Stored Procedures
+[Tech Source](https://stackoverflow.com/questions/13758003/how-to-take-backup-of-functions-only-in-postgres)
+
+```bash
+# Extract just the Schema from the DB
+pg_dump -U stergios --format=c --schema-only -f python-schema-20210518.ddl python
+
+# Create the list of functions (--list prints summarized TOC of the archive)
+pg_restore --list python-schema-20210518.ddl | grep FUNCTION > function_list
+```
+
+* Move the Stored Procedures to another Database
+```bash
+# And finally restore them (--use-list specifies the list file created above):
+# --use-list=FILENAME uses TOC from this file for selecting/ordering output
+pg_restore -U stergios -d money -L function_list python-schema-20210518.ddl
+pg_restore -U stergios -d nginx -L function_list python-schema-20210518.ddl
+pg_restore -U stergios -d 3dprinting -L function_list python-schema-20210518.ddl
+```
+
+
+### 3 Ways to export from PostgreSQL to CSV on the Client Side
+
+```sql
+\copy (Select * From foo) To '/tmp/test.csv' With CSV
+```
+
+```
+>psql dbname
+psql>\f ','
+psql>\a
+psql>\o '/tmp/output.csv'
+psql>SELECT * FROM users;
+psql>\q
+```
+
+```bash
+psql -d dbname -t -A -F"," -c "SELECT * FROM users" > output.csv
+```
+
+### 1 Way to export from PostgreSQL to CSV on the Server Side
+
+```sql
+Copy (Select * From foo) To '/tmp/test.csv' With CSV DELIMITER ',' HEADER;
+
+```
+
 ## Monday 5/17/2021
 
 * Docker Cheat Sheet  
