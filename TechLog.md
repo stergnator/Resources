@@ -14,6 +14,134 @@ output: pdf_document
 
 # Tech Notes for STM
 
+## Monday 5/17/2021
+
+* Docker Cheat Sheet  
+
+[Docker Command
+Line](https://docs.docker.com/engine/reference/commandline/docker/)
+
+```bash
+docker ps                    # List every container
+docker system df             # Show docker disk usage
+docker system prune –volumes # Prune images, containers, networks & volumes
+docker system info           # Display system-wide information
+```
+
+* Check the size of a docker image
+
+```bash
+docker image inspect <imgName> --format='{{.Size}}' | numfmt --to=iec-I
+```
+
+* How to load a docker image onto a different system
+
+```bash
+sudo docker save paiapps > paiapps_save.tar
+bzip2 --best paiapps_save.tar
+rsync -av --progress paiapps_save.tar.bz2 ${DESTCOMPUTER}
+ssh ${DESTCOMPUTER}
+bunzip –c paiapps_save.tar.bz2 | sudo docker load
+```
+
+* Start & Stop Docker Service in Linux
+```
+systemctl start docker
+systemctl stop docker
+```
+
+* Save Docker Image to Tar File
+```bash
+docker save -o image.tar <sha256_image_id>
+```
+
+* Load an image from a tar archive or STDIN
+```bash
+docker load --input image.tar
+```
+
+* Start Docker Container
+```bash
+docker start <container_name>
+```
+
+* Stop Docker Container
+```bash
+docker stop <container_name>
+```
+
+* Start Bash in Docker Container
+```bash
+docker exec -it <container> /bin/bash
+```
+* Exit Docker Interactive Terminal (Return to Host System)
+```bash
+ctrl-p ctrl-q
+```
+
+
+## Friday 5/7/2021
+
+###  How to [Calculate Cumulative Sum-Running Total in PostgreSQL](https://popsql.com/learn-sql/postgresql/how-to-calculate-cumulative-sum-running-total-in-postgresql)
+
+
+Using a PostgreSQL Common Table Expression (CTE) and a window function we can
+compute a cumulative sum/running total of any column.
+
+```sql
+WITH data AS (
+  SELECT _faqid, _faqcount, _faqtitle FROM clustermonthfaqcount(2, '2015-04', 14)
+)
+SELECT _faqid, _faqcount, _faqtitle, sum(_faqcount) OVER (ORDER BY _faqcount DESC)
+FROM data ;
+```
+
+```sql
+WITH data AS (
+SELECT MIN(cqt.faqid) AS thefaqid, TO_CHAR(p.creationdate, 'YYYY-MM') AS yearmonth,
+  COUNT(cqt.qtextid) AS thecount, MIN(f.faqtext) AS thetitle
+  FROM cluster_qtexts cqt
+  JOIN faqs f
+    ON cqt.faqid = f.faqid AND cqt.clusterrunid = f.clusterrunid and f.autoclusterid = cqt.clusterid
+  JOIN posts p
+    ON cqt.qtextid = p.id
+  WHERE cqt.clusterrunid = 2
+    AND cqt.clusterid=4
+    AND cqt.faqid = 304
+    AND p.creationdate BETWEEN '2014-04-01' and '2015-04-30'
+  GROUP BY to_char(p.creationdate, 'YYYY-MM')
+  ORDER BY to_char(p.creationdate, 'YYYY-MM')
+)
+SELECT thefaqid, yearmonth, thecount, thetitle,
+        sum(thecount) OVER (ORDER BY yearmonth rows between unbounded preceding and current row) AS total
+FROM data
+ORDER BY yearmonth ;
+```
+
+
+
+## Monday 5/3/2021 - Things to Invetigate
+
+- [ ] Javascript Futures/promises
+    They could be useful for chaining AJAX success callbacks calling other AJAX functions ad infinitum.
+
+- [ ] ReLearn Raspberry Pi Motor Hat Board.
+    Keep my progress detailed in [Raspberry Pi Stepper Motor Notes](../stepper/Notes.md)
+
+* Decimal Number Formatting in Javascript
+
+```javascript
+let formatters = {
+    default: new Intl.NumberFormat(),
+    currency: new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0, maximumFractionDigits: 0 }),
+    whole: new Intl.NumberFormat('en-US', { style: 'decimal', minimumFractionDigits: 0, maximumFractionDigits: 0 }),
+    oneDecimal: new Intl.NumberFormat('en-US', { style: 'decimal', minimumFractionDigits: 1, maximumFractionDigits: 1 }),
+    twoDecimal: new Intl.NumberFormat('en-US', { style: 'decimal', minimumFractionDigits: 2, maximumFractionDigits: 2 })
+};
+
+formatters.twoDecimal.format(1234.5678);  // result: "1,234.57"
+formatters.currency.format(28761232.291); // result: "$28,761,232"
+```
 ### Kill a process in golang:
 
 `.Output()` runs a command, waits for it to finish, and collects its output.
