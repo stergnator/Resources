@@ -27,15 +27,28 @@ pg_dump -U stergios --format=c --schema-only -f python-schema-20210518.ddl pytho
 
 # Create the list of functions (--list prints summarized TOC of the archive)
 pg_restore --list python-schema-20210518.ddl | grep FUNCTION > function_list
+
+# Create the list of VIEWs (--list prints summarized TOC of the archive)
+pg_restore --list python-schema-20210518.ddl | grep VIEW > function_list
 ```
 
 * Move the Stored Procedures to another Database
 ```bash
+# For Stored Procedures
+# You must delete manually first
 # And finally restore them (--use-list specifies the list file created above):
 # --use-list=FILENAME uses TOC from this file for selecting/ordering output
 pg_restore -U stergios -d money -L function_list python-schema-20210518.ddl
 pg_restore -U stergios -d nginx -L function_list python-schema-20210518.ddl
 pg_restore -U stergios -d 3dprinting -L function_list python-schema-20210518.ddl
+
+# For Views
+# You must delte manually first
+# And finally restore them (--use-list specifies the list file created above):
+# --use-list=FILENAME uses TOC from this file for selecting/ordering output
+pg_restore -U stergios -d money -L      view_list python-schema-20210518.ddl
+pg_restore -U stergios -d nginx -L      view_list python-schema-20210518.ddl
+pg_restore -U stergios -d 3dprinting -L view_list python-schema-20210518.ddl
 ```
 
 
@@ -130,6 +143,25 @@ docker exec -it <container> /bin/bash
 ctrl-p ctrl-q
 ```
 
+* Various
+```bash
+# Show Disk Usage
+sudo docker system df
+
+# Remove Unused Data
+sudo docker system prune -volumes
+
+# Show System Wide Info
+sudo docker system info
+
+# Print Huge JSOB Blob about container 
+sudo docker inspect <container id>
+
+# Print IP Address of container
+sudo docker inspect -f \
+  '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' \
+  <container id>
+```
 
 ## Friday 5/7/2021
 
