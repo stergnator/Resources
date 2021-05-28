@@ -15,6 +15,23 @@ output: pdf_document
 # Tech Notes for STM
 
 
+## Friday 5/28/2021
+
+* Upgrade all `brew` `casks`
+
+```sh
+brew upgrade --cask
+```
+
+The above will not update casks that do not have versioning information (version
+:latest) or applications that have a built-in upgrade mechanism (auto_updates
+true). To reinstall these casks (and consequently upgrade them if upgrades are
+available), run the upgrade command with the `--greedy` flag like this:
+
+```sh
+brew upgrade --cask --greedy
+```
+
 ## Tuesday 5/18/2021
 
 
