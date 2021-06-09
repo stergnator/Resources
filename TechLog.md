@@ -14,6 +14,71 @@ output: pdf_document
 
 # Tech Notes for STM
 
+## Wednesday 6/9/2021
+
+* Debugging why a Docker Container will not stop:
+```sh
+sudo docker start -a ecb10ceec32d
+```
+
+Here is the documentation on `docker start`:
+
+```sh
+sudo docker help start
+
+Usage:	docker start [OPTIONS] CONTAINER [CONTAINER...]
+
+Start one or more stopped containers
+
+Options:
+  -a, --attach                  Attach STDOUT/STDERR and forward signals
+      --checkpoint string       Restore from this checkpoint
+      --checkpoint-dir string   Use a custom checkpoint storage directory
+      --detach-keys string      Override the key sequence for detaching a container
+  -i, --interactive             Attach container's STDIN
+```
+
+## Tuesday 6/8/2021
+
+* Set Title of iTerm2 Window/Tab
+
+```sh
+echo -e "\033];MY_NEW_TITLE\007"
+```
+
+* Edit PList file or Fix iTerm3 Plist file
+  * I recently imported far too many color presets into iTerm (by accident)
+and it's painful to delete them one at a time through the UI. Is there a
+file somewhere that I can edit by hand to remove them en masse?
+
+  * You can convert your plist file to xml and hand edit it. Kind of painful.
+
+```sh
+cd /tmp
+cp ~/Library/Preferences/com.googlecode.iterm2.plist .
+plutil -convert xml1 com.googlecode.iterm2.plist
+vi com.googlecode.iterm2.plist
+# quit iterm2
+cp com.googlecode.iterm2.plist ~/Library/Preferences
+# restart iterm2
+```
+
+
+  * The least painful method I've found is to use the Xcode Editor (free
+download from the Mac App Store) to reset iTerm 2's color-schemes to
+factory defaults as follows:
+
+
+  - Quit iTerm
+  - Open ~/Library/Preferences/com.googlecode.iterm2.plist with Xcode Editor
+  (if it's not your default .plist editor, right click on the file in finder
+  and choose "open with">"Xcode"
+ - Delete the "Custom Color Presets" key
+ - Re-import the color-schemes you want.
+
+  * BEST ANSWER:  Using `brew` Install `PlistEdit Pro`
+
+    `/Applications/PlistEdit Pro.app/`
 
 ## Friday 5/28/2021
 
@@ -115,15 +180,40 @@ docker system info           # Display system-wide information
 docker image inspect <imgName> --format='{{.Size}}' | numfmt --to=iec-I
 ```
 
-* How to load a docker image onto a different system
+* Transfer a Docker Image onto a Different Computer
 
-```bash
-sudo docker save paiapps > paiapps_save.tar
-bzip2 --best paiapps_save.tar
-rsync -av --progress paiapps_save.tar.bz2 ${DESTCOMPUTER}
-ssh ${DESTCOMPUTER}
-bunzip –c paiapps_save.tar.bz2 | sudo docker load
+  * PART 1 - Extract & Compress the Docker Image
+
+```sh
+NOW=$(/bin/date "+%Y%m%d_%H%M%S")
+DESTCOMPUTER=dostm
+TARFILE="paiapps-${NOW}.tar"
+BZFILE="paiapps-${NOW}.tar.bz2"
+echo $TARFILE
+sudo docker save paiapps > ${TARFILE}
+ls -lh ${TARFILE}
+echo "Compressing ${TARFILE}"
+bzip2 --best ${TARFILE} 
+ls -lh ${BZFILE}
 ```
+
+  * PART 2 - Transfer the Docker Image to Different Computer
+
+```sh
+ls -lh ${BZFILE}
+echo "TRANSFERING ${BZFILE} to  ${DESTCOMPUTER}"
+rsync -av --progress "${BZFILE}" ${DESTCOMPUTER}:
+
+```
+
+  * PART 3 - ssh to Different Computer & Load Image
+
+```sh
+ssh ${DESTCOMPUTER}
+bunzip –c "${OUTFILE}.tar.bz2" | sudo docker load
+```
+
+
 
 * Start & Stop Docker Service in Linux
 ```
@@ -178,7 +268,15 @@ sudo docker inspect <container id>
 sudo docker inspect -f \
   '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' \
   <container id>
+
+# See all processes runing in a container.
+docker top <container id>
+
+# A method to find the IP address
+sudo docker inspect --format {{.State.Pid}} ecb10ceec32di
+
 ```
+
 
 ## Friday 5/7/2021
 
