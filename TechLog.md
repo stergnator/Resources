@@ -16,7 +16,25 @@ output: pdf_document
 
 ## Wednesday 6/9/2021
 
-* Debugging why a Docker Container will not stop:
+### Investigate Container Linking
+
+Containers can be linked[^202106091] to another container’s ports directly using --link
+remote_name:local_alias in the client’s docker run. This sets a number of
+environment variables that can then be used to connect:
+[^202106091]:[use-container-linking](https://docs.docker.com/samples/postgresql_service/#use-container-linking)
+
+```sh
+docker run --rm -t -i --link pg_test:pg eg_postgresql bash
+
+postgres@7ef98b1b7243:/$ psql -h $PG_PORT_5432_TCP_ADDR -p $PG_PORT_5432_TCP_PORT -d docker -U docker --password
+```
+
+### Debugging Docker Containers
+
+* Debugging a Docker Container that will not start
+Start the container where `STDOUT/STDERR` are attached to the console
+and hopefully error messages are printed to the console.
+
 ```sh
 sudo docker start -a ecb10ceec32d
 ```
@@ -272,9 +290,11 @@ sudo docker inspect -f \
 # See all processes runing in a container.
 docker top <container id>
 
-# A method to find the IP address
+# Method A to find the IP address
 sudo docker inspect --format {{.State.Pid}} ecb10ceec32di
 
+# Method B to find the IP address
+sudo docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' 89446b83faac
 ```
 
 
@@ -384,6 +404,10 @@ brew install coreutils findutils gnu-tar gnu-sed gawk gnutls gnu-indent gnu-geto
 ```
 
 ## Thursday 3/18/2021
+
+### PostgreSQL Docker Official Images
+
+[List of Postgresql Images at Docker Hub](https://hub.docker.com/_/postgres)
 
 ### PostgreSQL Docker Info
 
