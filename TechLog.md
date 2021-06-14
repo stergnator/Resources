@@ -295,6 +295,16 @@ sudo docker inspect --format {{.State.Pid}} ecb10ceec32di
 
 # Method B to find the IP address
 sudo docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' 89446b83faac
+
+# How to copy files FROM host TO Docker container?
+
+docker cp foo.txt containerID:/foo.txt
+
+# How to copy files TO host FROM Docker container?
+
+docker cp containerID:/foo.txt foo.txt
+
+
 ```
 
 
