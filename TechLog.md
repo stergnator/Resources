@@ -304,9 +304,24 @@ docker cp foo.txt containerID:/foo.txt
 
 docker cp containerID:/foo.txt foo.txt
 
-
 ```
 
+
+### Install VIM inside a docker container
+
+```sh
+docker exec -it <container> /bin/bash
+apt-get update
+apt-get -y install vim
+```
+
+### Install `ps` inside a docker container
+
+```sh
+docker exec -it <container> /bin/bash
+apt-get update
+apt-get install -y procps
+```
 
 ## Friday 5/7/2021
 
