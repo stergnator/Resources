@@ -306,6 +306,26 @@ docker cp containerID:/foo.txt foo.txt
 
 ```
 
+### Add an entry to /etc/hosts when starting a new docker container.
+Docker has a built in solution that will allow you to have your docker host
+automatically insert lines into the hosts file of a docker container when the
+image is initially starting up. All you need to do is include the following
+flag within your docker run command. This will allow you to add a host entry to
+a docker container.
+
+```sh
+--add-host yourdomain.com:127.0.0.1
+```
+
+So basically it looks like this:
+
+```sh
+docker run -d \
+--name wordpress \
+-p 8080:80 \
+--add-host yourdomain.com:127.0.0.1 \
+wordpress
+```
 
 ### Install VIM inside a docker container
 
