@@ -321,6 +321,14 @@ docker cp foo.txt containerID:/foo.txt
 
 docker cp containerID:/foo.txt foo.txt
 
+# How to copy files FROM IMAGE to host?
+# To copy a file from an image, create a temporary container, copy the file
+# from it and then delete it:
+
+id=$(docker create image-name)
+docker cp $id:path - > local-tar-file
+docker rm -v $id
+
 ```
 
 ### Add an entry to /etc/hosts when starting a new docker container.
