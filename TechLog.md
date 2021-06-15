@@ -16,6 +16,21 @@ output: pdf_document
 
 ## Tuesday 6/15/2021
 
+* Controlling PostgreSQL on Ubuntu 20.04
+Use systemctl command to manage postgresql service:
+
+  * stop service:
+`    systemctl stop postgresql`
+  * start service:
+`    systemctl start postgresql`
+  * show status of service:
+`    systemctl status postgresql`
+  * disable service(not auto-start any more)
+`    systemctl disable postgresql`
+  * enable service postgresql(auto-start)
+`    systemctl enable postgresql`
+
+
 ## Wednesday 6/9/2021
 
 ### Investigate Container Linking
