@@ -14,6 +14,66 @@ output: pdf_document
 
 # Tech Notes for STM
 
+## Tuesday 6/29/2021
+
+* `JSONPlaceholder` - a fake REST API.
+```
+fetch("https://jsonplaceholder.typicode.com/users/1")
+
+//
+
+fetch("https://jsonplaceholder.typicode.com/users/1") //1
+  .then((response) => response.json()) //2
+  .then((user) => {
+    console.log(user.address); //3
+  });
+
+// we can access the returned value of a Promise object in another .then() callback:
+
+const address = fetch("https://jsonplaceholder.typicode.com/users/1")
+  .then((response) => response.json())
+  .then((user) => {
+    return user.address;
+  });
+
+const printAddress = () => {
+  address.then((a) => {
+    console.log(a);
+  });
+};
+
+printAddress();
+
+
+//  OR using async / await syntax:
+
+const address = fetch("https://jsonplaceholder.typicode.com/users/1")
+  .then((response) => response.json())
+  .then((user) => {
+    return user.address;
+  });
+
+const printAddress = async () => {
+  const a = await address;
+  console.log(a);
+};
+
+printAddress();
+
+
+
+```
+
+## Thursday 6/17/21
+
+PostgreSQL Plan Evaluator
+http://tatiyants.com/pev/#/plans/plan_1623975860244
+
+psql -qAt -f explain02.sql python > analyze02.json
+
+
+
+
 ## Tuesday 6/15/2021
 
 * Controlling PostgreSQL on Ubuntu 20.04
