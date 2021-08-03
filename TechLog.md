@@ -14,6 +14,36 @@ output: pdf_document
 
 # Tech Notes for STM
 
+
+## Monday 8/2/2021
+
+
+* If you need to add headers to responses is echo:
+
+```go
+func main() {
+	e := echo.New()
+
+	// this middleware will add these headers to every handler
+	e.Use(func(next echo.HandlerFunc) echo.HandlerFunc {
+		return func(c echo.Context) error {
+			c.Response().Header().Add("Pragma", "no-cache")
+			// ..
+			// ..
+			return next(c)
+		}
+	})
+
+	e.GET("/", func(c echo.Context) error {
+		// or in handler function
+		c.Response().Header().Add("Pragma", "no-cache")
+		return c.JSON(http.StatusOK, "{}")
+	})
+
+	// ... start server
+}
+```
+
 ## Tuesday 6/29/2021
 
 * `JSONPlaceholder` - a fake REST API.
@@ -143,8 +173,8 @@ echo -e "\033];MY_NEW_TITLE\007"
 
 * Edit PList file or Fix iTerm3 Plist file
   * I recently imported far too many color presets into iTerm (by accident)
-and it's painful to delete them one at a time through the UI. Is there a
-file somewhere that I can edit by hand to remove them en masse?
+  and it's painful to delete them one at a time through the UI. Is there a
+  file somewhere that I can edit by hand to remove them en masse?
 
   * You can convert your plist file to xml and hand edit it. Kind of painful.
 
@@ -166,8 +196,8 @@ factory defaults as follows:
 
   - Quit iTerm
   - Open ~/Library/Preferences/com.googlecode.iterm2.plist with Xcode Editor
-  (if it's not your default .plist editor, right click on the file in finder
-  and choose "open with">"Xcode"
+    (if it's not your default .plist editor, right click on the file in finder
+    and choose "open with">"Xcode"
  - Delete the "Custom Color Presets" key
  - Re-import the color-schemes you want.
 
@@ -690,7 +720,7 @@ needs.
 % ./scripts/startProgram.sh --summarize
     ValueError: numpy.ndarray size changed, may indicate binary incompatibility. Expected 88 from C header, got 80 from PyObject
 ```
-  
+
 So I removed the packages installed by `brew`, and installed them
 using `pip3`.
 
@@ -1673,7 +1703,7 @@ On a mac (roadrunner) `PostgreSQL` store's it's log file at '/usr/local/var/log/
 
 * PostgreSQL Calculate "running total" for each row with Postgres
 
-```sql
+​```sql
 SELECT
   faqId, faqText, SUM(PercentOfTotal) OVER (ORDER BY theRank) AS SumOfTotal
 FROM LeaderBoard ;
@@ -2438,7 +2468,7 @@ export PGPASSWORD=A_GOOD_PASSWORD_HERE
 
 * Official golang Docker area: [https://hub.docker.com/_/golang]
 * Video 1:
- 
+
 [![Golang Docker](http://img.youtube.com/vi/UtNeLfXaBJM/0.jpg)](http://www.youtube.com/watch?v=UtNeLfXaBJM "Golang Docker")
 
 * Video 2:
