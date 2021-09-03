@@ -14,9 +14,171 @@ output: pdf_document
 
 # Tech Notes for STM
 
+## Thursday 9/2/2021
+
+
+
+* Postgresql To Return 0 when Null
+
+Use `max(coalesce(logincount, 0))` to avoid NULLs
+
+The above will still return NULL if the no rows match the WHERE clause. If that is
+not wanted, use `coalesce(max(logincount),0)` instead
+
+According to Postgres docs (9.6):
+
+    The COALESCE function returns the first of its arguments that is not null.
+    Null is returned only if all arguments are null. It is often used to
+    substitute a default value for null values when data is retrieved for
+    display, for example:
+
+[Info taken from here](https://dba.stackexchange.com/questions/162903/postgresql-to-return-0-when-null#162907)
+
+* How to use multiple `WITH` statements in one PostgreSQL query
+
+[Info take from here]
+(https://stackoverflow.com/questions/38136854/how-to-use-multiple-with-statements-in-one-postgresql-query)
+
+The second `Common Table Expression` [CTE] is preceded by a comma not a WITH
+statement so:
+
+```
+WITH cte1 AS (SELECT...)
+, cte2 AS (SELECT...)
+SELECT *
+FROM
+    cte1 c1
+    INNER JOIN cte2 c2
+    ON ........
+```
+
+You can also chain your results using WITH statement.
+
+```
+WITH tab1 as (Your SQL statement),
+tab2 as ( SELECT ... FROM tab1 WHERE your filter),
+tab3 as ( SELECT ... FROM tab2 WHERE your filter)
+SELECT * FROM tab3;
+```
+
+## Wednesday 8/18/2021
+
+* Setting up a new Droplet at OD Digital Ocean
+		* Choose the 'Docker' image from the Marketplace image tab/list.
+			* `docker -d` will already be running as a service and the docker command
+			  line tool is included in the PATH, so it’s ready to use.
+			* Note: The default firewall for the Docker One-Click is UFW, which is a
+			  front end to iptables. However, Docker modifies iptables directly to
+			  set up communication to and from containers. This means that UFW won’t
+			  give you a full picture of the firewall settings. You can override this
+			  behavior in Docker by adding --iptables=false to the Docker daemon.
+
+```
+
+ufw allow OpenSSH
+ufw enable
+reboot now
+
+apt-get update
+apt-get install -y procps
+apt-get install curl
+
+
+
+```
+
+### Digital Ocean Community Tutorials
+
+*Links I want to read about DO Digital Ocean
+
+[How To Remove Docker Images, Containers, and Volumes]
+(https://www.digitalocean.com/community/tutorials/how-to-remove-docker-images-containers-and-volumes)
+
+[Docker containers combines software and related dependencies into a
+standardized unit for software development that includes everything it needs to
+run: code, runtime, system tools and libraries. This guarantees that your
+application will always run the same and makes collaboration as simple as
+sharing a container image.]
+(https://marketplace.digitalocean.com/apps/docker)
+
+[Docker on DigitalOcean Community - Docker Tutorials, Questions, and Resources][
+(https://www.digitalocean.com/community/tags/docker?utm_source=digitalocean_marketplace_app_listing_page)
+
+[Initial Server Setup with Ubuntu 20.04]
+(https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-20-04)
+
+
+[How To Install and Use Docker on Ubuntu 20.04]
+(https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-20-04)
+
+
+
+## Monday 8/16/2021
+
+* SSL Server Test 
+This free online service performs a deep analysis of the configuration of any
+SSL web server on the public Internet. Please note that the information you
+submit here is used only to provide you the service. We don't use the domain
+names or the test results, and we never will.  [SSL Server
+Test](https://www.ssllabs.com/ssltest/)
+
+* Upgrading PostgreSQL on mac using brew:
+
+```
+==> postgresql
+To migrate existing data from a previous major version of PostgreSQL run:
+  brew postgresql-upgrade-database
+
+This formula has created a default database cluster with:
+  initdb --locale=C -E UTF-8 /usr/local/var/postgres
+For more details, read:
+  https://www.postgresql.org/docs/13/app-initdb.html
+
+To restart postgresql after an upgrade:
+  brew services restart postgresql
+Or, if you don't want/need a background service you can just run:
+  /usr/local/opt/postgresql/bin/postgres -D /usr/local/var/postgres
+
+==> Summary
+🍺  /usr/local/Cellar/postgresql/13.4: 3,230 files, 42.7MB
+Removing: /usr/local/Cellar/postgresql/13.3... (3,225 files, 42.7MB)
+Removing: /Users/stergios/Library/Caches/Homebrew/postgresql--13.3... (10.9MB)
+```
+
+## Tuesday 8/3/2021
+
+* Force firefox to clear dns cache
+  Go to this URL: about:networking#dns, then click the Clear DNS Cache button.
+
 
 ## Monday 8/2/2021
 
+* Commands I used at Digital Ocean to debug the firewall situation:
+
+```sh
+# see if the DNS entry is correct
+nslookup basingpoints.com
+
+# test if we can connect to a port
+nc -v basingpoints.com 80
+
+# look for firewall rejections:
+tail -f /var/log/syslog
+
+# We thought docker might be interfering, but it was not.
+service docker stop
+
+service --status-all
+
+# This was the key to fixing the problem.
+sudo ufw reload
+sudo ufw status
+sudo ufw allow http
+sudo ufw allow https
+
+# Also, firefox was caching a redirect from basingpoints.com to marinopoulos.net
+
+```
 
 * If you need to add headers to responses is echo:
 
