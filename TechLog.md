@@ -14,6 +14,18 @@ output: pdf_document
 
 # Tech Notes for STM
 
+## Monday 9/20/21
+
+* Managing python projects on the Mac
+
+```
+brew install python
+python -m venv .venv
+source .venv/bin/activate
+pip install ...
+```
+
+
 ## Thursday 9/2/2021
 
 
