@@ -14,7 +14,22 @@ output: pdf_document
 
 # Tech Notes for STM
 
-## Monday 9/20/21
+
+## Wednesday 10/6/2021
+
+* Handle refresh page event with javascript
+
+You need to use the
+[beforeunload](https://developer.mozilla.org/en-US/docs/Web/API/WindowEventHandlers/onbeforeunload)
+event.
+
+The onbeforeunload property of the WindowEventHandlers mixin is the event
+handler for processing beforeunload events. These events fire when a window is
+about to unload its resources. At this point, the document is still visible and
+the event is still cancelable.
+
+
+## Monday 9/20/2021
 
 * Managing python projects on the Mac
 
