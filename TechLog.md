@@ -15,6 +15,114 @@ output: pdf_document
 # Tech Notes for STM
 
 
+## Monday 11/15/2021
+
+* Network tools
+
+  * Mac OSX: pre Montery
+    `netstat -rn -f inet | grep default | head -n 1 | awk '{ print $2 }'`
+    `scutil --dns`
+  Source take from [HN](https://news.ycombinator.com/item?id=29225308)
+
+  * Montery: `networkQuality`
+
+## Friday 10/29/2021
+
+* SSH ProxyCommand example. Going through one host to reach another server
+
+
+How do I use and jump through one server to reach another using ssh on a Linux
+or Unix-like systems?
+
+Yes. Use the SSH ProxyCommand and ProxyJump example.
+
+We must use the `-W` flag: `-W host:port`
+
+The `-W` flag requests that standard input and output on the client be
+forwarded to host on port over the secure channel.  Implies -N, -T,
+ExitOnForwardFailure and ClearAllForwardings, though these can be overridden in
+the configuration file or using -o command line options.
+
+```bash
+
+Host iqmvjh
+    HostName iq-dvaidata19.iqdca.local
+    User stergios.marinopoulos
+    IdentityFile /Users/stergios/.ssh/faq4096-iqm
+    Port 22
+    ProxyCommand ssh -q -W %h:%p c8
+```
+
+
+
+## Wednesday 10/20/2021
+
+* Install `iterm2` shell integration
+
+```
+stergios@lastX86 ~/Pictures> curl -L https://iterm2.com/shell_integration/install_shell_integration_and_utilities.sh | bash
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100  5128  100  5128    0     0  33960      0 --:--:-- --:--:-- --:--:-- 33960
+Downloading script from https://iterm2.com/shell_integration/zsh and saving it to /Users/stergios/.iterm2_shell_integration.zsh...
+Checking if /Users/stergios/.zshrc contains iterm2_shell_integration...
+Appending source command to /Users/stergios/.zshrc...
+Downloading imgcat...
+Downloading imgls...
+Downloading it2api...
+Downloading it2attention...
+Downloading it2check...
+Downloading it2copy...
+Downloading it2dl...
+Downloading it2getvar...
+Downloading it2git...
+Downloading it2setcolor...
+Downloading it2setkeylabel...
+Downloading it2ul...
+Downloading it2universion...
+Adding aliases...
+
+--------------------------------------------------------------------------------
+
+Done.
+iTerm2 shell integration was installed!
+
+A script was installed to /Users/stergios/.iterm2_shell_integration.zsh
+Utilities were installed to /Users/stergios/.iterm2. You don't need to modify your PATH because /Users/stergios/.iterm2_shell_integration.zsh includes aliases for them.
+
+To make it work right now, do:
+  source /Users/stergios/.iterm2_shell_integration.zsh
+
+This line was also added to /Users/stergios/.zshrc, so the next time you log in it will be loaded automatically.
+
+--------------------------------------------------------------------------------
+
+You will also have these commands:
+imgcat filename
+  Displays the image inline.
+imgls
+  Shows a directory listing with image thumbnails.
+it2api
+  Command-line utility to manipulate iTerm2.
+it2attention start|stop|fireworks
+  Gets your attention.
+it2check
+  Checks if the terminal is iTerm2.
+it2copy [filename]
+  Copies to the pasteboard.
+it2dl filename
+  Downloads the specified file, saving it in your Downloads folder.
+it2setcolor ...
+  Changes individual color settings or loads a color preset.
+it2setkeylabel ...
+  Changes Touch Bar function key labels.
+it2ul
+  Uploads a file.
+it2universion
+  Sets the current unicode version.
+
+```
+
 ## Wednesday 10/6/2021
 
 * Handle refresh page event with javascript
