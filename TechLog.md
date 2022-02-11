@@ -15,6 +15,50 @@ output: pdf_document
 # Tech Notes for STM
 
 
+## Friday 2/11/2022
+
+* Updating MacOSX via Command Line
+
+I was trying to install a nonstandard package via brew, and the process printed out 
+the following gemL
+
+```
+Error: Your Command Line Tools are too outdated.
+Update them from Software Update in System Preferences or run:
+  softwareupdate --all --install --force
+
+If that doesn't show you any updates, run:
+  sudo rm -rf /Library/Developer/CommandLineTools
+  sudo xcode-select --install
+
+Alternatively, manually download them from:
+  https://developer.apple.com/download/all/.
+You should download the Command Line Tools for Xcode 13.2.1.
+```
+
+
+## Monday 11/22/2021
+
+* Install `lighttpd` on LlastX86
+  * Copy files to `/usr/local/var/www`
+
+```
+==> Pouring lighttpd--1.4.61.big_sur.bottle.tar.gz
+
+Docroot is: /usr/local/var/www
+
+The default port has been set in /usr/local/etc/lighttpd/lighttpd.conf to 8080 so that
+lighttpd can run without sudo.
+
+To start lighttpd now and restart at login:
+  brew services start lighttpd
+Or, if you don't want/need a background service you can just run:
+  lighttpd -f /usr/local/etc/lighttpd/lighttpd.conf
+==> Summary
+🍺  /usr/local/Cellar/lighttpd/1.4.61: 75 files, 2.8MB
+
+```
+
 ## Monday 11/15/2021
 
 * Network tools
