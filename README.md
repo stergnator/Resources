@@ -1,2 +1,6 @@
 # Resources
-A repository for common files I use daily or across multiple computers that are not associated with a project.
+
+A repository of technical information for software that I use regularly but is
+not commonly known (at least to me).  These are `golden nuggets` of information
+that once discovered are invaluable.
+
