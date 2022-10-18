@@ -1,3 +1,7 @@
+#
+# A makefile to convert TechLog.md into a HTML file using pandoc.
+#
+#
 # pandoc is a handy tool for converting between numerous text formats:
 # http://johnmacfarlane.net/pandoc/installing.html
 PANDOC := pandoc
