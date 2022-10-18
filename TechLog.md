@@ -14,6 +14,19 @@ output: pdf_document
 
 # Tech Notes for STM
 
+## Tuesday 10/18/22
+
+* How to Merge PDF Files on the Command Line
+
+  * There are a plethera of seemingly viable answers on this [Stack
+Exchange Page](https://apple.stackexchange.com/questions/230437/how-can-i-combine-multiple-pdfs-using-the-command-line)
+
+  * Here's the solution I used:
+```
+ gs -q -dNOPAUSE -dBATCH -sDEVICE=pdfwrite  -sOutputFile=merged.pdf file01.pdf file02.pdf file03.pdf
+```
+ Info taken from [this site](https://personalinterests.lipingyang.org/2018/01/12/two-ways-to-merge-pdf-files-on-mac-gui-and-command-line/)
+
 ## Monday 9/19/2022
 
 * Fixed PostgreSQL@14 update from homebrew
@@ -63,7 +76,7 @@ as the user logs in.
 
 ## Friday 5/6/2022
 
-* What does the following argments `as` abd `rel` do for the html `link` statement?
+ - [ ] What do the following argments `as` abd `rel` do for the html `link` statement?
 
 ```
 <link as="script" rel="preload" href="/webpack-runtime-b623371871d7c250936e.js">
