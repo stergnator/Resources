@@ -46,7 +46,7 @@ Exchange Page](https://apple.stackexchange.com/questions/230437/how-can-i-combin
 
 When I ran `brew upgrade` recently I noticed that `homebrew` had changed naming
 conventions for `PostgreSQL`. The old name was `postgres` and the new names
-include the version number, for example:  'postgresql@13' and `postgresql@14`
+include the version number, for example:  `postgresql@13` and `postgresql@14`
 
 Even now after I ran `brew uninstall postgresql` it managed to delete `postgesql` as
 well as `postgresql@14`.  Yikes!
@@ -58,19 +58,19 @@ When I ran `brew upgrade` today it updated postgresql to version 14.5.  However 
 with what the brew services plist files were expecting as far as data directory locations.
 
 I found the following versions of 5 different postgresql plist files one service file.
-
+```
   1 /Library/LaunchDaemons/homebrew.mxcl.postgresql.plist
   2 ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist
   3 ~/Library/LaunchAgents/homebrew.mxcl.postgresql@13.plist
   4 ~/Library/LaunchAgents/homebrew.mxcl.postgresql@14.plist
   5 /usr/local/Cellar/postgresql@14/14.5_4/homebrew.mxcl.postgresql@14.plist
   6 /usr/local/Cellar/postgresql@14/14.5_4/homebrew.ostgresql@14.service
-
+```
 
 `#1` was from an older install, was wrong, was trying to start anyway, and
 always starts trying to run as soon as the computer is booted. ( This was
 causing duplicate error logging messages about postgres not being able to run.
-) The files found in `~/Library/LaunchAgents`  control/begin execution as soon
+The files found in `~/Library/LaunchAgents`  control/begin execution as soon
 as the user logs in.
 
 `#5` is the `Master` and keeps writing over what ever is in `
@@ -79,12 +79,6 @@ as the user logs in.
 `#6` is where whoever/whatever creates `#5` get's it's data from.
 
 `#2` and `#3` were old and I deleted them
-
-/usr/local/Cellar/postgresql@14/14.5_4/homebrew.mxcl.postgresql@14.plist
-
-
-
-
 
 
 ## Friday 5/6/2022
@@ -122,7 +116,7 @@ You should download the Command Line Tools for Xcode 13.2.1.
 
 ## Monday 11/22/2021
 
-* Install `lighttpd` on LlastX86
+* Install `lighttpd` on lastX86
   * Copy files to `/usr/local/var/www`
 
 ```
