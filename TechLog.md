@@ -14,6 +14,19 @@ output: pdf_document
 
 # Tech Notes for STM
 
+## Thursday 10/27/2022
+
+* Add Text Subtitle to Video 
+
+Use ffmpeg to add text subtitles. This solution "burns the subtitles" into the
+video, so that every viewer of the video will be forced to see them.
+
+```
+ffmpeg -i source_video.mp4 -vf subtitles=MySubTitles.srt output_video.mp4
+```
+
+Info taken from [this site](https://stackoverflow.com/questions/8672809/use-ffmpeg-to-add-text-subtitles#17584272)
+
 ## Tuesday 10/18/22
 
 * How to Merge PDF Files on the Command Line
