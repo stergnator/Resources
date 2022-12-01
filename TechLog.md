@@ -14,6 +14,15 @@ output: pdf_document
 
 # Tech Notes for STM
 
+## Wednesday 11/30/2022
+
+* Use ffmpeg to Convert From MKV to MP4
+
+```
+ffmpeg -i  2021-03-11_LudicrousMode01-ClusterAnalysis.mkv  -c copy 2021-03-11_LudicrousMode01-ClusterAnalysis.mp4
+ffmpeg -i  2021-03-11_LudicrousMode02-PAIReport.mkv        -c copy 2021-03-11_LudicrousMode02-PAIReport.mp4
+```
+
 ## Thursday 10/27/2022
 
 * Add Text Subtitle to Video 
