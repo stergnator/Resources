@@ -3,7 +3,7 @@
 
 ## Monday 01/23/2023
 
-### Upgrade to postgresql@15.1_1.ventura.bottle.tar.gz  via brew 
+### On Gokart, I Upgraded to postgresql@15.1_1.ventura.bottle.tar.gz  via brew 
 
 ```sh
 brew upgrade postgresql@15
