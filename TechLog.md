@@ -14,6 +14,27 @@ output: pdf_document
 
 # Tech Notes for STM
 
+
+## Thursday 2/2/2023
+
+* Room requirments:
+  * Main room perimeter is 27ft x 32ft = 118ft
+  * Island ceiling perimeter is 9ft x 4ft = 26ft
+
+* Modern LED Strip Standards:
+  * WS2812B (5v) Max 16ft?
+  * WS2811 (24v) Max 65ft?
+
+[Interesing LED Supplier](https://www.superlightingled.com/ws2811-ip68-waterproof-led-strip-lights-24v-dream-color-1m50m-p-4484.html)
+
+* (NightDriverStrip](https://github.com/PlummersSoftwareLLC/NightDriverStrip) is
+a source code package for building a flash program that you upload to the ESP32
+microcontroller. It can drive up to 8 channels of WS2812B style LEDs connected
+to the chip pins and display fancy colors and patterns and designs on them.
+
+
+
+
 ## Wednesday 11/30/2022
 
 * Use ffmpeg to Convert From MKV to MP4
