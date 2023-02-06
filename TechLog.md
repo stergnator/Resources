@@ -14,6 +14,24 @@ output: pdf_document
 
 # Tech Notes for STM
 
+## Monday 2/6/2023
+
+Investigate [Swagger](https://swagger.io/specification/)
+The OpenAPI Specification (OAS) defines a standard, language-agnostic interface to HTTP APIs which allows both humans and computers to discover and understand the capabilities of the service without access to source code, documentation, or through network traffic inspection. When properly defined, a consumer can understand and interact with the remote service with a minimal amount of implementation logic.
+
+An OpenAPI definition can then be used by documentation generation tools to display the API, code generation tools to generate servers and clients in various programming languages, testing tools, and many other use cases.
+
+
+[Running the image from DockerHub](https://github.com/swagger-api/swagger-editor)
+
+There is a docker image published in DockerHub.  To use this, run the following:
+
+```bash
+docker pull swaggerapi/swagger-editor
+docker run -d -p 80:8080 swaggerapi/swagger-editor
+```
+
+This will run Swagger Editor (in detached mode) on port 80 on your machine, so you can open it by navigating to http://localhost in your browser.
 
 ## Thursday 2/2/2023
 
