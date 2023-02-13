@@ -14,6 +14,50 @@ output: pdf_document
 
 # Tech Notes for STM
 
+## Saturday 2/11/2023
+
+- Install `pygame` on `Windows 11`
+
+I tried many of the standard variations for installing `pygame` on `Windows 11`, but none of them worked.  Here is the one incantation that did work (it is the latest pre-release development version `2.1.3.dev8 > 2.1.2`):
+
+```powershell
+ # This is the only variation that worked for me.
+C:\Python311\Scripts\pip3.11.exe install pygame --pre
+Collecting pygame
+  Downloading pygame-2.1.3.dev8-cp311-cp311-win_amd64.whl (10.6 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 10.6/10.6 MB 9.3 MB/s eta 0:00:00
+Installing collected packages: pygame
+Successfully installed pygame-2.1.3.dev8
+```
+
+The following variations did not work for me in a `regular` powershell terminal:
+
+```powershell
+C:\Python311\Scripts\pip3.11.exe search pygame
+C:\Python311\Scripts\pip3.11.exe install pygame
+C:\Python311\python.exe -m pip install --upgrade pip
+C:\Python311\python.exe -m pip install -U pygame --user
+C:\Python311\python.exe -m pip --default-timeout=1200 install -U pygame --user
+```
+
+My failed attempts from a powershell terminal with Administrator privileges follow:
+
+```powershell
+C:\Python311\python.exe -m pip install --upgrade pip
+C:\Python311\python.exe -m ensurepip
+C:\Python311\Scripts\pip3.11.exe install pygame
+python.exe -m pip install --upgrade pip
+```
+
+### Where are my python `site-specific` folders on Windows 11?
+
+- You can find the location of the user install folder for python with `python -m site --user-base`.
+
+```powershell
+python -m site --user-base
+C:\Users\sterg\AppData\Roaming\Python
+```
+
 ## Monday 2/6/2023
 
 Investigate [Swagger](https://swagger.io/specification/)
