@@ -14,6 +14,25 @@ output: pdf_document
 
 # Tech Notes for STM
 
+---
+
+## Monday 4/5/2023
+
+### Tools to stream video to youtube and it's ilk.
+
+- What are some tools I can use to stream video to twitch and youtube at the same time?
+View other drafts
+
+There are a number of tools you can use to stream video to Twitch and YouTube at the same time. Here are a few popular options:
+
+- [`Restream`](https://restream.io/) is a popular multistreaming service that allows you to stream to multiple platforms at once, including Twitch, YouTube, Facebook, and more. It's free to use for up to three concurrent streams, and there are paid plans available for more advanced features.
+- [`OBS Studio`](https://obsproject.com/) is a free, open-source, and cross-platform screencasting and streaming app that supports multistreaming. It's a bit more complex to set up than `Restream`, but it gives you more control over your stream settings.
+- [`Streamlabs Desktop (formerly Streamlabs OBS)`](https://streamlabs.com) is based on OBS Studio. It offers streaming to multiple platforms, built-in chat widget and the ability to schedule your streams.  It is based on a fork of OBS Studio. Electron is used as the software framework for the user interface.
+- [`XSplit`](https://www.xsplit.com/) is a paid live streaming and video-mixing application developed and maintained by SplitmediaLabs. It is mostly used for capturing gameplay for live streaming or video recording purposes and offers a number of features for professional streamers, including multistreaming, overlays, and scene transitions.
+- [`StreamYard`](https://streamyard.com/) is a live streaming studio in your browser. Stream directly to Facebook, YouTube, LinkedIn, and other platforms. StreamYard makes it easy to broadcast your live show to all audiences on multiple platforms at once.
+
+---
+
 ## Saturday 2/11/2023
 
 - Install `pygame` on `Windows 11`
