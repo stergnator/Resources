@@ -16,7 +16,58 @@ output: pdf_document
 
 ---
 
-## Monday 4/5/2023
+### PowerShell example on how to find an executable file, then how to run it with arguments.
+
+I was getting errors trying to perform such a task in the obvious manner.  In particular powershell complained about command line arguments.
+I found a solutions on [this page](https://perplexity.nl/toolbox/compress-pdf-files-using-powershell-and-ghostscript/)
+
+```ps
+# CombinePDFFiles.ps1 - make a new pdf file by combining many smaller files using Ghostscript
+# Also, have powershell locate the pdf executable.
+# No error checking is performed
+#
+# The nominal approach using bash:
+# gs -dNOPAUSE -sDEVICE=pdfwrite -sOUTPUTFILE=combine.pdf -dBATCH 1.pdf 2.pdf
+#
+
+# Find the ghostsript executable
+$GhostScript = ((Get-ChildItem 'C:\Program Files\gs\' -Directory | Sort-Object LastWriteTime -Descending)[0].Fullname) + "\bin\gswin64.exe"
+
+# Construct the argument list
+$Arguments = '-dNOPAUSE -sDEVICE=pdfwrite -sOUTPUTFILE=AllAmplifierDocuments.pdf -dBATCH' `
+  + ' "Amplifiers_Thevenin Equivalent Circuits.pdf"' `
+  + ' "Amplifiers_Ground.pdf"' `
+  + ' "Amplifiers_Energy.pdf"' `
+  + ' "Amplifiers_Amplifier Model.pdf"' `
+  + ' "Amplifiers_Analog To Digital Converters.pdf"' `
+  + ' "Amplifiers_Common Amplifier Topologies.pdf"' `
+  + ' "Amplifiers_06-lm1086.pdf"' `
+  + ' "Amplifiers_06-opa2344.pdf"' `
+  + ' "Amplifiers_06-robot_layout.pdf"' `
+  + ' "Amplifiers_09-lm1086.pdf"' `
+  + ' "Amplifiers_09-opa2344.pdf"' `
+  + ' "Amplifiers_16-msp430g2553.pdf"' `
+  + ' "Amplifiers_16-opa2344.pdf"' `
+  + ' "Amplifiers_18-lm380.pdf"' `
+  + ' "Amplifiers_18-msp430g2553.pdf"' `
+  + ' "Amplifiers_19-msp430g2553.pdf"' `
+  + ' "Amplifiers_19-opa2344.pdf"' `
+  + ' "Amplifiers_25-robot_layout.pdf"' `
+  + ' "Amplifiers_27-opa2344.pdf"' `
+  + ' "Amplifiers_28-SingleSupply.pdf"' `
+  + ' "Amplifiers_28-opa2344.pdf"' `
+  + ' "Amplifiers_29-opa2344.pdf"'
+
+# Execute the program with command line arguments
+Start-Process $GhostScript -ArgumentList $Arguments -Wait
+
+```
+
+
+## Thursday 4/6/2023
+---
+
+## Monday 4/3/2023
 
 ### Tools to stream video to youtube and it's ilk.
 
