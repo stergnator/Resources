@@ -16,6 +16,34 @@ output: pdf_document
 
 ---
 
+## Wednesday 4/12/2023
+
+###  Upgraded openjdk on GoKart
+
+In case I want the system Javs wrappers to findopenJDK I need to run the following symlink.
+
+```
+==> openjdk
+For the system Java wrappers to find this JDK, symlink it with
+  sudo ln -sfn /usr/local/opt/openjdk/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk.jdk
+
+openjdk is keg-only, which means it was not symlinked into /usr/local,
+because macOS provides similar software and installing this software in
+parallel can cause all kinds of trouble.
+
+If you need to have openjdk first in your PATH, run:
+  fish_add_path /usr/local/opt/openjdk/bin
+
+For compilers to find openjdk you may need to set:
+  set -gx CPPFLAGS "-I/usr/local/opt/openjdk/include"
+
+```
+
+
+---
+
+## Thursday 4/6/2023
+
 ### PowerShell example on how to find an executable file, then how to run it with arguments.
 
 I was getting errors trying to perform such a task in the obvious manner.  In particular powershell complained about command line arguments.
@@ -63,8 +91,6 @@ Start-Process $GhostScript -ArgumentList $Arguments -Wait
 
 ```
 
-
-## Thursday 4/6/2023
 ---
 
 ## Monday 4/3/2023
