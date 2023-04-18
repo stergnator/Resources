@@ -16,6 +16,52 @@ output: pdf_document
 
 ---
 
+## Monday 4/17/2023
+
+### Getting rsync running on Windows11
+
+I've always had trouble running `rsync` on `Windows11`.  While some early problems were related to the normal config and key files problems, I quickly eliminated those, but I still could not transfer files.  So I abandoned trying to get it to work, installed `cygwin`, got `rsync` working quickly, and I went on about my technical life.  But still, the problem irked me, and I would occasionally return to the problem in an effort to solve it.
+
+I admit it's been 19 years since I last drive Windows as my daily desktop, and in that time frame `PowerShell` has come top prominence on the platform.  I figured some of the trouble was related to me not really grokking PS.  So occasionally I come back to the problem, thinking I've learned enough about PowerShell to finally solve the problem, and today I think I cracked the nut.
+
+I have many versions of `rsync` installed on `Windows11`.  There are 2 in the path, and 5 total on the filesystem.  (Why did I abandon `OSX` again?)  Here are the two in the path:
+
+```ps
+where.exe rsync
+C:\ProgramData\chocolatey\bin\rsync.exe
+C:\Program Files\OpenSSH\bin\rsync.exe
+```
+
+And here are the 5 on the filesystem:
+
+```bash
+sterg@longboard /cygdrive/c
+$ find . -print 2>/dev/null | grep rsync.exe
+./Program Files/OpenSSH/bin/rsync.exe
+./ProgramData/chocolatey/bin/rsync.exe
+./ProgramData/chocolatey/lib/rsync/tools/bin/rsync.exe
+./ProgramData/chocolatey/lib/rsync/tools/cwrsync_6.2.7_x64_free/bin/rsync.exe
+./tools/cygwin/bin/rsync.exe
+```
+
+I notice that [`Chocolatey`](https://chocolatey.org/) has a recent version of [`mls-software-openssh`](https://community.chocolatey.org/packages/mls-software-openssh) published, which is installed at `'C:/Program Files/OpenSSH`.  I hope that that I can get this version to work, and after I upgrade to the latest version, so I dig in.
+
+I have learned that `&` is the call operator which allows you to execute a command, a script, or a function from this [SOF page](https://stackoverflow.com/questions/22074507/what-does-the-symbol-in-powershell-mean#22074638).  Also, I have learned that the various [quotation marks serve different purposes](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_quoting_rules?view=powershell-7.3)
+
+A string enclosed in double quotation marks is an __expandable__ string.
+
+A string enclosed in single quotation marks is a __verbatim__ string. The string is passed to the command exactly as you type it. No substitution is performed.
+
+So putting the above together, __AND__ directing `rsync` to use a specific version of the remote shell to use (even though it's the local shell!) I came up with the follow command line which actually works:
+
+```ps
+& "C:\Program Files\OpenSSH\bin\rsync.exe"  -e "'C:\Program Files\OpenSSH\bin\ssh.exe'" ttt.py  f350:/volume1/Media/
+```
+
+That seems like a PIA to use, so I think I'll keep dropping into `cygwin` when I need to use `rsync`.  But at least I finally have cobbled together a command line that actually works.  Which is a sign of progress, as I continue to use reintegrate myself with Windows11.  (I actually run vmware/ubuntu hosted by Windows11 so the problem is not actually all that acute.)
+
+---
+
 ## Wednesday 4/12/2023
 
 ###  Upgraded openjdk on GoKart
