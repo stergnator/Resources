@@ -7,6 +7,36 @@ output: pdf_document
 
 ---
 
+## Friday 5/12/2023
+### Upgrade to PostgreSQL 15.3  from 15.2_3 on gokart
+
+==> postgresql@15
+This formula has created a default database cluster with:
+  initdb --locale=C -E UTF-8 /usr/local/var/postgresql@15
+For more details, read:
+  https://www.postgresql.org/docs/15/app-initdb.html
+
+postgresql@15 is keg-only, which means it was not symlinked into /usr/local,
+because this is an alternate version of another formula.
+
+If you need to have postgresql@15 first in your PATH, run:
+  fish_add_path /usr/local/opt/postgresql@15/bin
+
+For compilers to find postgresql@15 you may need to set:
+  set -gx LDFLAGS "-L/usr/local/opt/postgresql@15/lib"
+  set -gx CPPFLAGS "-I/usr/local/opt/postgresql@15/include"
+
+For pkg-config to find postgresql@15 you may need to set:
+  set -gx PKG_CONFIG_PATH "/usr/local/opt/postgresql@15/lib/pkgconfig"
+
+To restart postgresql@15 after an upgrade:
+  brew services restart postgresql@15
+Or, if you don't want/need a background service you can just run:
+  LC_ALL="C" /usr/local/opt/postgresql@15/bin/postgres -D /usr/local/var/postgresql@15
+
+
+---
+
 ## Tuesday 3/14/2023
 
 ### On Gokart I upgraded from postgresql@15 15.2 -> 15.2_3
