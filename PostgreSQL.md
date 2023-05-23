@@ -7,6 +7,30 @@ output: pdf_document
 
 ---
 
+## Tuesday 5/23/2023
+
+### Convert SQL output to JSON
+
+```sql
+
+SELECT row_to_json(v.*) AS Money 
+FROM (SELECT id, title, body FROM posts WHERE posttypeid=1 ORDER BY id LIMIT 20000) AS v;
+
+```
+
+### Save SQL out to a file
+
+```sql
+
+COPY (
+  SELECT row_to_json(v.*) AS Money 
+  FROM (SELECT id, title, body FROM posts WHERE posttypeid=1 ORDER BY id LIMIT 20000) AS v)
+TO '/tmp/money20000.json' ;
+
+```
+
+---
+
 ## Friday 5/12/2023
 ### Upgrade to PostgreSQL 15.3  from 15.2_3 on gokart
 
