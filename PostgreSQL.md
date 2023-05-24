@@ -7,9 +7,36 @@ output: pdf_document
 
 ---
 
+## Wednesday 5/24/2023
+
+### Fix `COPY`s broken escape system
+
+The `COPY` function converts all embedded double quotes into `\"` .  So if your embedded quotes are already escaped (as `row_to_json` and `jsonb_agg` produce), then the double quotes will be double escaped thus producing invalid json.
+
+While the `COPY` command allows you to fix this ONLY IF you are exporting to CSV, for all other formats it does not offer any help.
+
+You can fix the double escaped double quote output afterwards using the following `SED` one liner.
+
+```sh
+cat money10.json    | sed 's/\\\\"/\\"/g' > money10Fixed.json
+```
+
+### Convert SQL output to a proper JSON object
+
+This version produces a proper array of objects as 1 properly formatted and complete json object.  (But it still has the double quote problem described below)
+
+```sql
+
+select jsonb_agg(v.*) as Money from (select id, title, body from posts where posttypeid=1 limti 10) as v;
+
+
+```
+
 ## Tuesday 5/23/2023
 
 ### Convert SQL output to JSON
+
+The following works but does not join all the rows together in an array.  Instead each row is a proper json object but you cannot then send the output into a program that expects one complete json object (or an array of json objects - which is what I want.)
 
 ```sql
 
@@ -19,6 +46,8 @@ FROM (SELECT id, title, body FROM posts WHERE posttypeid=1 ORDER BY id LIMIT 200
 ```
 
 ### Save SQL out to a file
+
+The `COPY` function converts all embedded double quotes into `\"` .  So if your embedded quotes are already escaped (as `row_to_json` and `jsonb_agg` produce), then the double quotes will be double escaped thus producing invalid json.
 
 ```sql
 
