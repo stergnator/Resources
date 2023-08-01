@@ -16,6 +16,25 @@ output: pdf_document
 
 ---
 
+## Tuesday 8/1/2023
+
+### Git  tiptoe around files you don't want to add to history.
+
+Taken from [Jujutsu: A Git-compatible DVCS](https://news.ycombinator.com/item?id=36952796)
+
+Dealing with the nuisance of having to tiptoe around files you don't want to add to history, this can help:
+
+```sh
+git update-index --assume-unchanged <file>
+git update-index --no-assume-unchanged <file>
+```
+This ignores changes while you're testing - but you have to remember to turn it off or, iiuc, you won't pull intentional changes either.
+
+A commenter warned against doing this [HackerNews](https://news.ycombinator.com/item?id=36954723). The commenter when on to say this [StackOverflow](
+https://stackoverflow.com/questions/13630849/git-difference-between-assume-unchanged-and-skip-worktree/23806990#23806990) page helped him understand this better.
+
+---
+
 ## Monday 4/17/2023
 
 ### Getting rsync running on Windows11
@@ -250,7 +269,7 @@ ffmpeg -i  2021-03-11_LudicrousMode02-PAIReport.mkv        -c copy 2021-03-11_Lu
 
 ## Thursday 10/27/2022
 
-* Add Text Subtitle to Video 
+* Add Text Subtitle to Video
 
 Use ffmpeg to add text subtitles. This solution "burns the subtitles" into the
 video, so that every viewer of the video will be forced to see them.
@@ -330,7 +349,7 @@ as the user logs in.
 
 * Updating MacOSX via Command Line
 
-I was trying to install a nonstandard package via brew, and the process printed out 
+I was trying to install a nonstandard package via brew, and the process printed out
 the following gemL
 
 ```
@@ -605,7 +624,7 @@ sharing a container image.]
 
 ## Monday 8/16/2021
 
-* SSL Server Test 
+* SSL Server Test
 This free online service performs a deep analysis of the configuration of any
 SSL web server on the public Internet. Please note that the information you
 submit here is used only to provide you the service. We don't use the domain
@@ -939,7 +958,7 @@ Copy (Select * From foo) To '/tmp/test.csv' With CSV DELIMITER ',' HEADER;
 
 ## Monday 5/17/2021
 
-* Docker Cheat Sheet  
+* Docker Cheat Sheet
 
 [Docker Command
 Line](https://docs.docker.com/engine/reference/commandline/docker/)
@@ -970,7 +989,7 @@ echo $TARFILE
 sudo docker save paiapps > ${TARFILE}
 ls -lh ${TARFILE}
 echo "Compressing ${TARFILE}"
-bzip2 --best ${TARFILE} 
+bzip2 --best ${TARFILE}
 ls -lh ${BZFILE}
 ```
 
@@ -1038,7 +1057,7 @@ sudo docker system prune -volumes
 # Show System Wide Info
 sudo docker system info
 
-# Print Huge JSOB Blob about container 
+# Print Huge JSOB Blob about container
 sudo docker inspect <container id>
 
 # Print IP Address of container
@@ -1734,7 +1753,7 @@ CREATE USER stergios WITH ENCRYPTED PASSWORD '__STRONG_PASSWORD_HERE__';
 -- Change PostgreSQL password
 ALTER ROLE stergios  WITH ENCRYPTED PASSWORD '__STRONG_PASSWORD_HERE__';
 
--- Create one database so that user can login to the database. 
+-- Create one database so that user can login to the database.
 CREATE DATABASE money ;
 
 -- Grant database access to the new user.
@@ -1745,11 +1764,11 @@ GRANT ALL PRIVILEGES ON DATABASE money to stergios;
 
 * We want to allow all computers to access this database server.  In
 `/usr/local/var/postgres/postgresql.conf` add the line **62** in the listing
-below under the `Connections Settings` section. 
+below under the `Connections Settings` section.
 
 ```bash
-53 #------------------------------------------------------------ 
-54 # CONNECTIONS AND AUTHENTICATION 
+53 #------------------------------------------------------------
+54 # CONNECTIONS AND AUTHENTICATION
 55 #------------------------------------------------------------ \
 56
 57 # - Connection Settings -
@@ -1800,7 +1819,7 @@ separates two compound selectors. A selector of the form `A B` represents an
 
 `>` is the [child combinator](https://www.w3.org/TR/selectors/#child-combinators).
 
-The following selector represents a `p` element that is a immediate child of `div`: 
+The following selector represents a `p` element that is a immediate child of `div`:
 
     div > p
 
@@ -1932,7 +1951,7 @@ $ asdf install ruby 2.5.1
 
 ### PostgreSQL / GoLang `sql.NullString` and `sql.NullInt64`
 
-`SQL` has different null values than `Golang`. 
+`SQL` has different null values than `Golang`.
 
 So how do you [work with `SQL NULL` values and `JSON`](https://stackoverflow.com/questions/33072172/how-can-i-work-with-sql-null-values-and-json-in-a-good-way)?
 
@@ -2065,7 +2084,7 @@ git push ghorigin master --force
 ## Wednesday 1/27/2021
 
 * To place text in the center of the doughnut chart see this [resource](https://stackoverflow.com/questions/37384092/chart-js-doughnut-with-rounded-edges-and-text-centered)
-using the Chart.pluginService.  
+using the Chart.pluginService.
 
 * However, that is a very advanced approach.  For a simpler approach see this [resource](https://jsfiddle.net/mgyp0jkk/)  which I lifted from this
 [page](https://stackoverflow.com/questions/20966817/how-to-add-text-inside-the-doughnut-chart-using-chart-js)
@@ -2141,7 +2160,7 @@ You must turn on the server log to log every call to the database server.
 log_statement = all
 ```
 
-Do not use `log_statement = all` on a production server. 
+Do not use `log_statement = all` on a production server.
 
 * PostgreSQL Logging Information
 
@@ -2187,7 +2206,7 @@ log_statement = 'all'           # none, ddl, mod, all
 
 // 'data[15_1][Name]' - find 3 values in this string:
 params, err := getParams(`data\[(?P<ClusterRunId>\d+)_(?P<ClusterId>\d+)\]\[(?P<ColName>Name)\]`, key)
- 
+
  func getParams(regEx, s string) (paramsMap map[string]string, err error) {
 
   err = errors.New("no matches")
@@ -2269,7 +2288,7 @@ For global settings place them in the global settings above.
 
 * I learned about the PostgreSQL `rank()` and `lag()` functions.
 
-### PostgreSQL LAG() 
+### PostgreSQL LAG()
 
 * The `LAG()` function lets access a row which comes before the current row at a
 specific physical offset.
@@ -2300,7 +2319,7 @@ FROM (
     ORDER BY periodtype DESC, periodname DESC
     ) AS iq1
   ) AS iq2
-WHERE 
+WHERE
   (iq2.periodtype = 'y' AND iq2.therank <= 4) OR
   (iq2.periodtype = 'q' AND iq2.therank <= 12) OR
   (iq2.periodtype = 'm' AND iq2.therank <= 24) OR
@@ -2318,13 +2337,13 @@ sudo ./update-golang.sh
 
 * Go notes on modules becoming the default in early 2021
 
-"We suggest using modules, as they are the new standard and become default 
+"We suggest using modules, as they are the new standard and become default
 from go 1.16 (to be released in early 2021)."
 
-Read about [Go code organization](https://golang.org/doc/code.html) to learn 
-how to configure your environment. This extension works in both 
-[GOPATH](https://github.com/golang/vscode-go/blob/master/docs/gopath.md) and 
-module [modes](https://github.com/golang/vscode-go/blob/master/docs/modules.md). 
+Read about [Go code organization](https://golang.org/doc/code.html) to learn
+how to configure your environment. This extension works in both
+[GOPATH](https://github.com/golang/vscode-go/blob/master/docs/gopath.md) and
+module [modes](https://github.com/golang/vscode-go/blob/master/docs/modules.md).
 
 
 
@@ -2530,7 +2549,7 @@ export GOPATH=/usr/local/far/go
 go get github.com/davecgh/go-spew/spew
 go get github.com/gorilla/websocket
 go get github.com/labstack/echo
-go get github.com/lib/pq  
+go get github.com/lib/pq
 ```
 
 ## Tuesday 10/27/2020
@@ -2541,7 +2560,7 @@ I keep getting caught off guard or surprised by the decisions homebrew makes
 when I ask it to `upgrade` a package.  Seemingly safe packages to upgrade (e.g.
 `stunnel`) which have no obvious relevance to major packages my development
 projects depend on cause the major packages to get upgraded.  The aforementioned
-`stunnel` caused and upgrade from `PostgreSQL-12_4` to `PostgresSQL-13`.  
+`stunnel` caused and upgrade from `PostgreSQL-12_4` to `PostgresSQL-13`.
 
 Bottom line: I need to be more careful when using brew to upgrade seemingly simple programs,
 and I need a better way to manage development environments.  For python it is simple, I should be
@@ -2662,16 +2681,16 @@ function brew_find_pkg {
 find $(brew --prefix)/Cellar/ | grep somefilename
 ```
 
-More accurately, 
+More accurately,
 
 ```bash
-find $(brew --cellar) -name somefilename 
+find $(brew --cellar) -name somefilename
 ```
 
 ## Thursday 7/30/2020
 
 
-* [https://plotly.com/javascript/] 
+* [https://plotly.com/javascript/]
 Built on top of d3.js and stack.gl, Plotly.js is a high-level, declarative
 charting library. plotly.js ships with over 40 chart types, including 3D
 charts, statistical graphs, and SVG maps.  plotly.js is free and open source
@@ -2771,7 +2790,7 @@ model = pickle.loads(blob[1])
   - You can create cells on a Python file by typing "#%%"
   - Use "Shift + Enter " to run a cell, the output will be shown in the interactive window
 
-* Produce the quarter from a timestamp field 
+* Produce the quarter from a timestamp field
 
 ```sql
 select creationdate, to_char(creationdate, 'FMYYYY-Q') from posts limit 5 ;
@@ -2791,9 +2810,9 @@ select creationdate, to_char(creationdate, 'FMYYYY-Q') from posts limit 5 ;
 * PostgreSQL List all values of a non-aggregated field into 1 column.
 
 ```sql
-SELECT a, array_agg(b), string_agg(c) 
-FROM t 
-GROUP BY a 
+SELECT a, array_agg(b), string_agg(c)
+FROM t
+GROUP BY a
 ORDER BY a;
 ```
 
@@ -2839,7 +2858,7 @@ $$;
 ```
 
 
-* Find the ordinal number of a row in a query 
+* Find the ordinal number of a row in a query
   * The ROW_NUMBER() function is a window function that assigns a sequential integer to each row in a result set.
   * Make sure the both order by clauses have the same set of fileds to get the intended result
 
@@ -2897,7 +2916,7 @@ More details about Hyper-V causing VirtualBox to fail may be found are here: [r/
 
 ## Friday 7/10/2020
 
-### Using the Python Extension in VSCode  
+### Using the Python Extension in VSCode
 
 You can execute python code inside of a file using "Cells"
 
