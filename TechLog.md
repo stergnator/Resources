@@ -14,6 +14,19 @@ output: pdf_document
 
 # Tech Notes for STM
 
+
+---
+
+## Friday 9/15/2023
+
+### ZIP/CSV Data Download Pipeline using curl, gunzip, and sqlite3
+
+```sh
+
+curl -s https://www.ecb.europa.eu/stats/eurofxref/eurofxref-hist.zip | gunzip | sqlite3 -csv':memory:' '.import /dev/stdin stdin'   "select Date from stdin order by USD asc limit 1;"
+
+```
+
 ---
 
 ## Tuesday 8/1/2023
