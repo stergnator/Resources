@@ -14,6 +14,23 @@ output: pdf_document
 
 # Tech Notes for STM
 
+---
+
+## Sunday 11/5/2023
+
+Working w/ git
+
+### [Move existing, uncommitted work to a new branch in Git](https://stackoverflow.com/questions/1394797/move-existing-uncommitted-work-to-a-new-branch-in-git)
+
+Update 2020 / Git 2.23
+
+Git 2.23 adds the new `switch`` subcommand in an attempt to clear some of the confusion that comes from the overloaded usage of checkout.
+
+```sh
+git switch -c <new-branch>
+```
+
+[Creating a pull request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request)
 
 ---
 
