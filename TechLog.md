@@ -16,6 +16,23 @@ output: pdf_document
 
 ---
 
+---
+
+## Thursday 11/9/2023
+
+* Setting up [Starship](https://starship.rs) Prompt for Windows Terminal.  Also works in all major shells.
+
+  * See [here for examples](https://computingforgeeks.com/best-terminal-shell-prompts-for-zsh-bash-fish/)
+
+* Find your PowerShell configuration
+
+```cmd
+$PROFILE
+
+C:\Users\sterg\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1
+```
+---
+
 ## Sunday 11/5/2023
 
 Working w/ git
