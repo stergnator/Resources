@@ -49,6 +49,8 @@ git switch -c <new-branch>
 
 [Creating a pull request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request)
 
+Create a pull request to propose and collaborate on changes to a repository. These changes are proposed in a branch, which ensures that the default branch only contains finished and approved work.
+
 ---
 
 ## Friday 9/15/2023
