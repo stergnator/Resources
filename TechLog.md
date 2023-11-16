@@ -16,6 +16,14 @@ output: pdf_document
 
 ---
 
+## Monday 11/13/2023
+
+* [python-dotenv Library](https://pypi.org/project/python-dotenv/)
+
+`python-dotenv` reads key-value pairs from a .env file and can set them as
+environment variables. It helps in the development of applications following the
+[12-factor](https://12factor.net/) principles.
+
 ---
 
 ## Thursday 11/9/2023
