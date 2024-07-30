@@ -15,6 +15,14 @@
 pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
 ```
 
+### Is it Common to Engineer Features for Deep Learning?
+
+- [ ] [7 of the Most Used Feature Engineering Techniques](https://archive.is/cYtxG)
+
+- [ ] [Feature Engineering For Deep Learning](https://medium.com/inside-machine-learning/feature-engineering-for-deep-learning-2b1fc7605ace)
+
+    The conclusion is simple: many deep learning neural networks contain hard-coded data processing, feature extraction, and feature engineering. They may require less of these than other machine learning algorithms, but they still require some.
+
 ## Sunday 7/28/2024
 
 ### Areas of Interest

@@ -14,6 +14,34 @@ output: pdf_document
 
 # Tech Notes for STM
 
+
+## Monday 7/29/2024
+
+Currently pytorch is not compatable with numpy2 on windows.  I had to downgrade
+to numpy1.  The error is known and being worked on.  Seems like the torch
+wheels on PyPi where built against numpy1.
+
+[Release 2.4 windows wheels are not compatible with numpy 2.0 #131668](https://github.com/pytorch/pytorch/issues/131668)
+
+```txt
+A module that was compiled using NumPy 1.x cannot be run in
+NumPy 2.0.1 as it may crash. To support both 1.x and 2.x
+versions of NumPy, modules must be compiled with NumPy 2.0.
+Some module may need to rebuild instead e.g. with 'pybind11>=2.12'.
+
+If you are a user of the module, the easiest solution will be to
+downgrade to 'numpy<2' or try to upgrade the affected module.
+We expect that some modules will need time to support NumPy 2.
+```
+
+* Downgrade `numpy` for use with `pytorch`.  The following command took care of both uninstalling `numpy-2.01` and then installing `numpy-1.26.4`
+
+```sh
+pip3 install "numpy<2.0"
+# pip install numpy==1.26.4
+```
+
+
 ---
 
 ## Monday 11/13/2023
