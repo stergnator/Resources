@@ -1,5 +1,10 @@
 # Work Journal for August 2024
 
+## Tuesday 7/30/2024
+
+- [x] Read Chapter 3 in `DLwP2`
+
+
 ---
 
 ## Monday 7/29/2024
@@ -46,7 +51,7 @@ pip3 install torch torchvision torchaudio --index-url https://download.pytorch.o
 install, select preferences and run the command to install PyTorch locally, or
 get started quickly with one of the supported cloud platforms.
 
-- Read this book. [Deep Learning with PyTorch 2nd Edition](<../../Downloads/Books/MLB/Deep_Learning_with_PyTorch_Second_Editi_v4_MEAP.pdf>)
+- Read [Deep Learning with PyTorch 2nd Edition (DLwP2)](<../../Downloads/Books/MLB/Deep_Learning_with_PyTorch_Second_Editi_v4_MEAP.pdf>)
 
 - Collect & resurrect my old datasets only after I can do some LTMS examples from the book.
 
