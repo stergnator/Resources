@@ -1,9 +1,43 @@
 # Work Journal for August 2024
 
+---
+
+Friday 8/2/2024
+
+- [ ] Make a diversion today and read the `offical` getting started documentation pointed to by the [GitHub PyTorch repo](https://pytorch.org/tutorials/beginner/basics/intro.html)
+
+---
+
+## Thursday 8/1/2024
+
+- [x] Continue reading through Chapter 4 in `DLwP2`
+  - Focus on the time series section, 4.4.  Done.  But I don't understand the motivation for re-shaping the tensor.
+  - More reading and running the example code was done today.  While I learned more about the PyTorch `tensor`, I am not entirely comfortable with the speed and brevity the book has adopted.  For example, I am still unclear why the airplane travel example, which is a univariate model and a standard example used by most ML tool kits, creates a tensor w/ 3 dimensions for input where two of the dimensions are 1D only, and this does not include the target.  There was mention of this multi-dimensional approach in other models.  There must be some reason motivating it.  Perhaps the GPU really likes this data structure?
+  - [ ] Find another resource to help explain the modeling.
+
+---
+
+## Wednesday 7/31/2024
+
+- [ ] Read Chapter 4 in `DLwP2`
+  - I worked through section 4.3.  Each section that I am interested in get's
+    its own file.  I check using ipython along the way, and at the end I run the
+    whole file.  It's redundant and inefficient, but I learn a little bit more
+    that way.  I wish I could just read and absorb, but that's not me.
+- [ ] Review Monteprediction
+- [ ] Reevaluate the BPNDX system
+- I read Chapter 1 `PyTorch Recipes`.  It is an example laden text of the basic
+  building blocks for using pytorch notation
+
 ## Tuesday 7/30/2024
 
 - [x] Read Chapter 3 in `DLwP2`
-
+  - worked through all examples
+    - Aggregated them all in one file `chap03.py` and ran from command line
+    - also ran individual examples in ipython
+    - wrote my chapter notes into `~/src/code/python/pt/chap03.py`
+- Started reviewing resources for time series forecasting using deep learning.
+  - stored results in [Resource List](TimeSeriesDeepLearningBooks.md) which is untracked for now.
 
 ---
 
