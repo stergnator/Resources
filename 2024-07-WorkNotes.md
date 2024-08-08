@@ -2,6 +2,48 @@
 
 ---
 
+Wednesday 8/7/2024
+
+- Finished working with Chapter 4 in `DLwP2`.
+  - The last section covered text based OHE, which motivated discussion of embeddings.
+  - My code can be found [here]((<src/code/python/pt/chap04-E.py>))
+- I can now confidently say that the term `Tensor` used in the ML world has
+  absolutely nothing to do with mathematical tensors used in physics. Coming
+  from a physics/engineering background, the term tensor is used in the
+  mathematical sense where the notion of point, vectors, spaces, reference
+  systems, and transformations between them are codified. The classical notion
+  of tensors (tensor fields) as used in differential geometry, algebraic
+  geometry, general relativity, in the analysis of stress and strain in
+  materials, and in numerous applications in the physical sciences are not
+  what's happening here. In ML they are a multi-dimension matrix - full stop.
+
+---
+
+Tuesday 8/6/2024
+
+- Adding new book resource [Modern Time Series Forecasting with Python (2022)](Books/MLB)
+  Along with traditional time series techniques, it also covers ML approaches as well as DL approaches.
+  - I have cloned the book's github directory
+  - [ ] Closely examine the examples of pytorch's dataloader classes.  I should be able to leverage this.
+- Additional book resource [Machine Learning for Time Series Forecasting with Python (2020)](Books/MLB)
+  While this book uses `keras` and `scikit-learn` as opposed to `pytorch` is does have nice explanations.
+- [x] Reread 4.3 Representing Tabular Data (Wine Dataset), and worked with the example code  [chap04-B.py](src/code/python/pt/chap04-B.py) closely.
+  - Once again, I examined closely their implementation of One Hot Encoding.
+
+---
+
+Monday 8/5/2024
+
+- [ ] Made a [little program](<src/code/python/pt/oneHot.py>) to experiment with One-Hot-Encoding.
+  - Made a simple python only version
+  - Made a scikit-learn based version
+  - Made a pandas based version
+  - I think I'm done with One-Hot-Encoding for now!
+
+- Worked on understanding `tensor.scatter_()`.  It's an in place function for moving elements in a tensor according to input sources,
+
+---
+
 Friday 8/2/2024
 
 - [ ] Make a diversion today and read the `offical` getting started documentation pointed to by the [GitHub PyTorch repo](https://pytorch.org/tutorials/beginner/basics/intro.html)
