@@ -2,6 +2,13 @@
 
 ---
 
+## Thursday 8/8/2024
+
+- [ ] Read Chapter 13 **Common Modeling Patterns for Time Series** in the book __Modern Time Series Forecasting with Python__
+- [ ] Read Blog Post [A Short Chronology Of Deep Learning For Tabular Data](https://sebastianraschka.com/blog/2022/deep-learning-for-tabular-data.html)
+
+---
+
 Wednesday 8/7/2024
 
 - Finished working with Chapter 4 in `DLwP2`.
@@ -17,6 +24,12 @@ Wednesday 8/7/2024
   materials, and in numerous applications in the physical sciences are not
   what's happening here. In ML they are a multi-dimension matrix - full stop.
 
+- [x] I finished the SolidEdge tutorial named `Part (Ordered Mode)`
+  [Introduction to modeling parts with ordered features](https://docs.sw.siemens.com/en-US/doc/246738425/PL20220830878154140.seppabj/seppabj_introduction)
+- [SolidEdge Index to Tutorials](https://docs.sw.siemens.com/en-US/doc/246738425/PL20220830878154140.xid1846157/xid486886) is the page that contains a listing and links to the tutorial collection.
+- [ ] The next tutorial for me is [`Sheet Metal Part (Hybrid Mode)`](https://docs.sw.siemens.com/en-US/doc/246738425/PL20220830878154140.sessash/xid602585#xid602586)
+
+- [ ] Start Chapter 5 in `DLwP2`
 ---
 
 Tuesday 8/6/2024
