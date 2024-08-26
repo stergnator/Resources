@@ -2,14 +2,79 @@
 
 ---
 
+## Monday 8/25/2024
+
+I took a week off from logging my entries.  Here is a summary of the educational work I performed last week.
+
+- I finished chapter 5 in `DLwP2`.  There's a file for each major section in the
+  `src/code/python/pt/` directory.
+- I started the Coursera Class [Deep Neural Networks with
+  PyTorch](https://www.coursera.org/learn/deep-neural-networks-with-pytorch)
+  Actually I started the class on `EDX.org`, but the audio was horrible.  It was
+  an robot generated voice reading from an ill prepared script.  The class was
+  actually created by IBM in 2017.  The notes on the site confirmed that the
+  majority of people thought the delivery was very bad.  Anyway, I abandoned
+  that class and found a similar class on Coursera.  It turned out to be the
+  same class by IBM but updated in 2019 with a better voice.  The content is
+  still lacking, but I am able to fill in the gaps from the various books I am
+  ready through. My notes for this version of the class are in the
+  `src/code/python/pt/Coursera` directory.  I completed section 4 of this class.
+
+
+
+---
+
+## Wednesday 8/14/2024
+
+- Worked through the 1st half of chapter 5 in `DLwP2`
+- [x] Finish 2nd half of chapter 5 in `DLwP2`
+
+---
+
+## Monday 8/12/2024
+
+### Goals for this week
+
+- [ ] PyTorch Activities
+  - [ ] Read Chapter 5 in `DLwP2` and work the examples.
+  - [ ] Find a dataset to work with
+- [ ] Flesh out idea of school class schedule for students.  Leo's schedule was
+  horrible.  The school is either incompetent or negligent.  The schedule was so
+  bad it's hard to imagine someone purposely gave him 3 music class electives he
+  did not ask for, and **none** of the electives he requested.
+  - Sub Goals
+    - Use `mojo.🔥`
+    - Use `scipy.optimize.linprog`
+- [ ] See if this [PyTorch video series](https://www.youtube.com/watch?v=kY14KfZQ1TI&list=WL&index=11) is any good.
+- [ ] Learn more Solid Edge
+  - [ ] Read and work examples in `Modeling synchronous and ordered features`
+- [ ] Study Greek
+- [ ] Continue to develope notes in [Obsidian](https://obsidian.md/).  I have
+  been good with adding tags.  Now, add inter-document links too as this will
+  develop the knowledge graph.
+
+---
+
+## Sunday 8/11/2024
+
+- I did a little digging into [AutoGluon](https://github.com/autogluon/autogluon)
+  - [ ] Do a small project in AutoGluon
+- I read the web page [A Short Chronology Of Deep Learning For Tabular Data by Sebastian Raschka](https://sebastianraschka.com/blog/2022/deep-learning-for-tabular-data.html) The post contains a short summaries on a list of papers with links.  It's a useful resource.
+- I read a little bit of `2021 Solid Edge Black Book`.  It was not a productive read.
+  - [ ] Switch to another Resource
+
+---
+
 ## Thursday 8/8/2024
 
 - [ ] Read Chapter 13 **Common Modeling Patterns for Time Series** in the book __Modern Time Series Forecasting with Python__
 - [ ] Read Blog Post [A Short Chronology Of Deep Learning For Tabular Data](https://sebastianraschka.com/blog/2022/deep-learning-for-tabular-data.html)
+- [Installed PyTorch_Tabular](https://github.com/manujosephv/pytorch_tabular) which makes it easy to work with DL models in the tabular data domain, and it just so happens that timeseries data is tabular.
+  - [ ] Read the PyTorch Tabular very detailed [documentation and tutorials](https://pytorch-tabular.readthedocs.io/en/latest/) to get you started.
 
 ---
 
-Wednesday 8/7/2024
+## Wednesday 8/7/2024
 
 - Finished working with Chapter 4 in `DLwP2`.
   - The last section covered text based OHE, which motivated discussion of embeddings.
@@ -32,7 +97,7 @@ Wednesday 8/7/2024
 - [ ] Start Chapter 5 in `DLwP2`
 ---
 
-Tuesday 8/6/2024
+## Tuesday 8/6/2024
 
 - Adding new book resource [Modern Time Series Forecasting with Python (2022)](Books/MLB)
   Along with traditional time series techniques, it also covers ML approaches as well as DL approaches.
@@ -45,7 +110,7 @@ Tuesday 8/6/2024
 
 ---
 
-Monday 8/5/2024
+## Monday 8/5/2024
 
 - [ ] Made a [little program](<src/code/python/pt/oneHot.py>) to experiment with One-Hot-Encoding.
   - Made a simple python only version
@@ -57,7 +122,7 @@ Monday 8/5/2024
 
 ---
 
-Friday 8/2/2024
+## Friday 8/2/2024
 
 - [ ] Make a diversion today and read the `offical` getting started documentation pointed to by the [GitHub PyTorch repo](https://pytorch.org/tutorials/beginner/basics/intro.html)
 
