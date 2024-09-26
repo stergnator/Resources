@@ -1,5 +1,157 @@
 # Work Journal for August 2024
 
+
+---
+
+## Tuesday 9/25/2024
+
+- I need to create a new python virtual environment since after installing
+`tensorflow` the existing environment got corrupted.  I did not really need to
+install `tensorflow` as all I really needed was `tensorboard`.  But when you
+install and run just `tensorboard` it produces a message about reduced capabilities
+which I thought were important.  Surprise! I don't need them (yet?)!
+
+### VENV Corruption Details
+
+The corruption is evidenced when when some, but not all, python and pip
+commands produced messages similar to the following:
+
+```txt
+Fatal error in launcher: Unable to create process using ': The system cannot find the file specified.
+```
+
+And here's another example.
+
+```txt
+❯ pip list --local
+Fatal error in launcher: Unable to create process using '"[redacted]\src\KB\PyTorch\Jupyter\.venv\Scripts\python.exe"  "[redacted]\src\KB\.venv\Scripts\pip.exe" list --local': The system cannot find the file specified.
+```
+
+It may have been related to using an `Alias` to initialize the virtual environment as follows:
+
+```powershell
+Set-Alias -Name avenv  -Value [redacted]\src\bin\venv\Scripts\Activate.ps1
+```
+
+I will stop using this alias and see what happens.
+
+### Steps to produce the new virtual environment
+
+```powershell
+
+# new directory for this common environment
+
+cd src/bin/
+python3 -m venv 'venv'
+./venv/Scripts/Activate.ps1
+# use https://pytorch.org/get-started/locally/ to generate the following command
+pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
+
+python -c "import torch;print(torch.__version__)"
+  > 2.4.1+cu124
+
+pip3 install --upgrade numpy
+python -c "import numpy as np;print(np.__version__)"
+  > 2.1.1
+
+pip install tensorboard
+python -c "import tensorboard;print(tensorboard.__version__)"
+  > 2.17.1
+
+pip install monteprediction
+pip install jupyter
+
+
+```
+
+---
+
+---
+
+## Through Sunday 9/22/24
+
+- Added a git repo to the Obsidian KB
+- Installed [Working Copy](https://workingcopyapp.com/) on the ipad so that I can see
+  my KB on it.
+  - [ ] Trying to get iOS Obsidian syncing with git is near impossible unless you are using github.  I am not making my KB public at this point.  It will eventually replace my [Resources.md], [TechLog.md], and [PostgreSQL.md] files.
+
+- I worked up to page 175 in `Deep Learning with PyTorch - Step-by-Step`, i.e. `Going Classy`.
+
+## Friday 9/6/2024
+
+- As of 8/28/2024 [PyTorch Release 2.4.1 - Final RC is available](https://dev-discuss.pytorch.org/t/pytorch-release-2-4-1-final-rc-is-available/2422)
+
+Ok, let's test it and see if it works with numpy 2+.  It does!
+
+```sh
+pip3 install torch==2.4.1 torchvision==0.19.1 torchaudio==2.4.1 --index-url https://download.pytorch.org/whl/test/cu124
+```
+
+---
+
+## Thursday 9/5/2024
+
+- I have worked well into chapter 7 this week, through the first half of the `Dataset` class.
+
+- Worked through pg 66 of `Deep Learning with PyTorch - Step-by-Step`, which is basically a rehash of every thing I read so far.
+
+- Worked through PyTorch tutorial.  Up to [Build the Neural Network](https://pytorch.org/tutorials/beginner/basics/buildmodel_tutorial.html)
+
+---
+
+## Tuesday 8/26/2024
+
+- Today I asked [Claude.ai](https://cluade.ai) for a recommendation for pytorch online tutorials.  It responded with
+
+```
+Good morning. For scientists and engineers with programming and mathematical modeling experience, I'd recommend the official PyTorch tutorials available on the PyTorch website. These tutorials are comprehensive and well-suited for those with a strong technical background.
+
+The official PyTorch tutorials cover:
+
+1. Basic tensor operations
+2. Neural network modeling
+3. Data loading and preprocessing
+4. Training and optimization techniques
+5. Advanced topics like custom C++ and CUDA extensions
+
+These tutorials are designed to quickly bring experienced programmers up to speed with PyTorch's capabilities and syntax.
+
+Additionally, you might find the "Deep Learning with PyTorch" free online book valuable. It's written by Eli Stevens, Luca Antiga, and Thomas Viehmann, and provides in-depth explanations of PyTorch concepts with a focus on practical applications.
+
+Would you like me to provide more details on specific aspects of these resources or suggest any supplementary materials?
+```
+
+Interestingly, the book suggestion I am already reading.  That's good to know, and I will also start looking at the main PyTorch website as well.
+
+I then followed up asking for a list of supplementary materials, which it promptly produced:
+
+```
+Certainly. Here's a list of supplementary materials that can complement the official PyTorch tutorials for scientists and engineers:
+
+1. "Dive into Deep Learning" - An interactive book that teaches deep learning using PyTorch. It covers both theory and implementation.
+
+2. Fast.ai's "Practical Deep Learning for Coders" course - While not exclusively PyTorch-focused, it uses PyTorch and provides excellent practical insights.
+
+3. Stanford CS230 Deep Learning course - Includes PyTorch implementations of various deep learning models.
+
+4. "PyTorch for Deep Learning and Computer Vision" course on Udemy - Focuses on computer vision applications using PyTorch.
+
+5. "Programming PyTorch for Deep Learning" by Ian Pointer - A book that covers creating and deploying deep learning applications with PyTorch.
+
+6. PyTorch Lightning documentation - A lightweight PyTorch wrapper that simplifies training complex models.
+
+7. Paperspace tutorials - Offers various PyTorch tutorials on topics like GANs, reinforcement learning, and more.
+
+8. "Deep Learning with PyTorch Step-by-Step" by Daniel Voigt Godoy - A comprehensive guide available on GitHub.
+
+9. TorchVision, TorchText, and TorchAudio documentation - For domain-specific PyTorch extensions.
+
+10. "PyTorch Recipes" by Avik Jain - A GitHub repository with various PyTorch implementations and tricks.
+
+Would you like more information on any of these resources or recommendations tailored to specific areas of interest within deep learning or PyTorch?
+
+```
+
 ---
 
 ## Monday 8/25/2024
