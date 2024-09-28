@@ -8,10 +8,14 @@ PANDOC := pandoc
 
 # generate HTML and Graphviz Flowchart files
 
-all: TechLog.html PostgreSQL.html
+all: TechLog.html PostgreSQL.html 2024-07-WorkNotes.html
+
+2024-07-Worknotes.html: 2024-07-Worknotes.md buttondown.css
+	$(PANDOC) -f markdown+pandoc_title_block --mathjax -s -c buttondown.css --table-of-contents --embed-resources --standalone -o $@ $<
+# pandoc --embed-resources --standalone --mathjax 2024-07-WorkNotes.md -o 2024-07-WorkNotes.html
 
 TechLog.html: TechLog.md buttondown.css
-	$(PANDOC) -f markdown+pandoc_title_block -s -c buttondown.css --table-of-contents --self-contained -o $@ $<
+	$(PANDOC) -f markdown+pandoc_title_block -s -c buttondown.css --table-of-contents --embed-resources --standalone -o $@ $<
 
 PostgreSQL.html: PostgreSQL.md buttondown.css
-	$(PANDOC) -f markdown+pandoc_title_block -s -c buttondown.css --table-of-contents --self-contained -o $@ $<
+	$(PANDOC) -f markdown+pandoc_title_block -s -c buttondown.css --table-of-contents --embed-resources --standalone -o $@ $<

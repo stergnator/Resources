@@ -1,5 +1,96 @@
-# Work Journal for August 2024
+# Work Journal for August through September 2024
 
+---
+
+## Saturday 9/28/2024
+
+- As I developed my own pet problem of linear estimation using pytorch I ran
+into a problem of incompatible tensor shapes. The error code is:
+
+```
+mat1 and mat2 shapes cannot be multiplied (1x100 and 1x1)
+Error occurs, No graph saved
+Traceback (most recent call last):
+  File "[redacted]\src\code\python\pt\STM_ld_csv_data.py", line 247, in <module>
+...
+...
+...
+  File "[redacted]\src\bin\venv\Lib\site-packages\torch\nn\modules\linear.py", line 117, in forward
+    return F.linear(input, self.weight, self.bias)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: mat1 and mat2 shapes cannot be multiplied (1x100 and 1x1)
+```
+
+The line 247 is noting special, so the problem must lie elsewhere:
+
+```
+writer.add_graph(model, x_dummy.to(device))
+```
+
+The surprising thing to me about this error is that I assembled the code from
+various fragments I have read in books and webpages and so when I compared my
+code to the original sources I could not see any significant differences. A
+remaining difference was the data source.  For my pet problem I was using custom
+data I had previously saved in a file and then subsequently read in from that
+file as a `pandas dataframe`, while the original code was generating the data
+from normal distributions as `numpy arrays`.  After further investigation I
+learned that the tensors created from these different sources had different
+shapes.
+
+The original data has the desirable shape of
+
+```python
+x_tensor.shape
+  torch.Size([20000, 1])
+```
+
+while my custom data had the malformed shape of
+
+```python
+x_tensor.shape
+  torch.Size([20000])
+```
+
+My solution was to change the shape of the tensors I created from my custom data using the [tensor.view()](#tensor.view) method::
+
+```python
+x_tensor = torch.as_tensor(dataP['x']).float().view(dataP['x'].size, 1).to(device)
+y_tensor = torch.as_tensor(dataP['y']).float().view(dataP['y'].size, 1).to(device)
+```
+
+An improved solution is to make sure `float32` data types are returned in pandas
+dataframe when read in from a csv file as opposed to the default 64bit floats as
+follows:
+
+```python
+dataP = pd.read_csv(inputCsvDataFN,
+                    dtype = {'x': np.float32 , 'y': np.float32}
+                    )
+```
+
+And then the above solution simplifies to the following (and uses less
+memory too):
+
+```python
+x_tensor = torch.as_tensor(dataP['x']).view(dataP['x'].size, 1).to(device)
+y_tensor = torch.as_tensor(dataP['y']).view(dataP['y'].size, 1).to(device)
+```
+
+The lesson here is to make certain I understand and know the shapes of my tensors.
+
+### Tensor.view()
+
+[Tensor.view(*shape) → Tensor](https://pytorch.org/docs/stable/generated/torch.Tensor.view.html) documentation.
+
+  Returns a new tensor with the same data as the self tensor but of a different shape.
+
+  The returned tensor shares the same data and must have the same number of elements, but may have a different size. For a tensor to be viewed, the new view size must be compatible with its original size and stride, i.e., each new view dimension must either be a subspace of an original dimension, or
+  only span across original dimensions $d,d+1,…,d+kd,d+1,…,d+k$ that satisfy the following contiguity-like condition that $∀i=d,…,d+k−1∀i=d,…,d+k−1,$
+
+$$
+  stride[i]=stride[i+1]×size[i+1]  \\
+  stride[i]=stride[i+1]×size[i+1]
+$$
 
 ---
 
@@ -10,6 +101,16 @@
 install `tensorflow` as all I really needed was `tensorboard`.  But when you
 install and run just `tensorboard` it produces a message about reduced capabilities
 which I thought were important.  Surprise! I don't need them (yet?)!
+
+I'm ok with the `reduced feature set` as seen in the startup message below:
+
+```powershell
+code\python\pt via 🐍 v3.12.6 (venv)
+tensorboard.exe --logdir=runs
+  TensorFlow installation not found - running with reduced feature set.
+  Serving TensorBoard on localhost; to expose to the network, use a proxy or pass --bind_all
+  TensorBoard 2.17.1 at http://localhost:6006/ (Press CTRL+C to quit)
+```
 
 ### VENV Corruption Details
 
@@ -60,7 +161,7 @@ python -c "import tensorboard;print(tensorboard.__version__)"
 
 pip install monteprediction
 pip install jupyter
-
+pip install matplotlib
 
 ```
 
